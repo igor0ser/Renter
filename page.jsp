@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>SO question 2370960</title>
+        <title>A</title>
     </head>
     <body>
-         <p>Message: ${message}</p>
+         <p>Autorization</p>
     </body>
 </html>
