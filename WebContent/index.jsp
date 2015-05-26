@@ -28,30 +28,30 @@
 
 <div class= "center-container animated fadeInUpBig">
 <b>Registration form:</b>
-<form id="reg-form">
+<form id="reg-form" action="controller" method="get">
 <input type="hidden" name="command" value ="registration"/>
 <table>
 <tr><td>Login:</td>
-<td><input type="text" name="login" required><span class="required"></span></td></tr>
+<td><input type="text" name="login" required></td></tr>
 <tr><td>Password:</td>
-<td><input type="password" name="password" required></td><td><span class="required"></span></td></tr>
+<td><input type="password" name="password" required></td></tr>
 <tr><td>Repeat Password:</td>
 <td><input type="password" name="repeat_password" required></td></tr>
 <tr><td>Email:</td>
-<td><input type="email" name="email"></td></tr>
+<td><input type="email" name="email" required></td></tr>
 <tr><td>First Name:</td>
-<td><input type="text" name="first_name"></td></tr>
+<td><input type="text" name="first_name" required></td></tr>
 <tr><td>Last Name:</td>
-<td><input type="text" name="last_name"></td></tr>
+<td><input type="text" name="last_name" required></td></tr>
 <tr><td>Phone Number:</td>
-<td><input type="tel" name="phone_number"></td></tr>
+<td><input type="tel" name="phone_number" required></td></tr>
 <tr><td><b>Adress:</b></td></tr>
 <tr ><td>Street:</td>
-<td><input type="text" name="street"></td></tr>
+<td><input type="text" name="street" required></td></tr>
 <tr ><td>House number:</td>
-<td><input type="text" name="house_number"></td></tr>
+<td><input type="text" name="house_number" required></td></tr>
 <tr ><td>Appartment number: </td>
-<td><input type="text" name="appartment_number"></td></tr>
+<td><input type="text" name="appartment_number" required></td></tr>
 <tr><td colspan = "2"  align = "center"><button  name="registatin" type="submit">Submit</button></td></tr>
 </table>
 </form>

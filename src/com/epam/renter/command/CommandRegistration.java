@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.renter.datasource.DAOFactory;
+import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
 
 public class CommandRegistration implements ICommand {
@@ -29,18 +30,42 @@ public class CommandRegistration implements ICommand {
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
+		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
+		String email = request.getParameter(EMAIL);
+		String firstName = request.getParameter(FIRST_NAME);
+		String lastName = request.getParameter(LAST_NAME);
+		String phoneNumber = request.getParameter(PHONE_NUMBER);
+		String street = request.getParameter(STREET);
+		String houseNumber = request.getParameter(HOUSE_NUMBER);
+		String appartmentNumber = request.getParameter(APPARTMENT_NUMBER);
 		
-		User user = DAOFactory.mySQLFactory.mySQLDAOUser.read(login);
+		if (!password.equals(repeatPassword)){
+			response.getWriter().println("Password not equals to repeat_password");
+			return null;
+		}
 		
-		if (user == null){
-			response.getWriter().println("Wrong login");
+		if(DAOFactory.mySQLFactory.mySQLDAOUser.read(login) != (null)){
+			response.getWriter().println("such user is exist");
+			return null;
 		}
-		else if (!user.getPassword().equals(password)){
-			response.getWriter().println("Wrong password");
-			}
-		else{
-			request.getRequestDispatcher("application.jsp").forward(request, response);
-		}
+		
+		response.getWriter().println("go to DAO");
+		Address address= new Address(street, houseNumber, appartmentNumber);
+		DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
+		
+		response.getWriter().println("address is created");
+		response.getWriter().println(address);
+		
+		address =DAOFactory.mySQLFactory.mySQLDAOAddress.readByAddress(street, houseNumber, appartmentNumber);
+		
+		
+		User user = new User(login, password, firstName, lastName, email, phoneNumber, address);
+		DAOFactory.mySQLFactory.mySQLDAOUser.create(user);
+		
+		response.getWriter().println("user is created");
+		response.getWriter().println(user);
+		 
+		
 	
 		return null;
 		

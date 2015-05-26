@@ -73,25 +73,4 @@ font: 1em 'PT Sans', Tahoma, Arial;
 }
 
 
-.form-item .required:before,
-.form-item .required:after{
-    font-size: 14px;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    color: #fff;
-    display: inline-block;
-    border-radius: 50%;
-}
-}
-.form-item input:valid + .required:before{
-    content: 'v';
-    background: #006400;     
-}
-.form-item input:invalid + .required:after{
-    content: 'x';
-    background: #f00;     
-}
-
  

@@ -9,14 +9,14 @@ public class User extends AbstractUser {
 		address = new Address();
 	}
 
-	public User(String login, String password, String lastName,
-			String firstName, String email, String phoneNumber, Address address) {
+	public User(String login, String password, String firstName,
+			String lastName, String email, String phoneNumber, Address address) {
 		super(login, password, lastName, firstName, email, phoneNumber);
 		this.address = address;
 	}
 
-	public User(int id, String login, String password, String lastName,
-			String firstName, String email, String phoneNumber, Address address) {
+	public User(int id, String login, String password, String firstName,
+			String lastName, String email, String phoneNumber, Address address) {
 		super(id, login, password, lastName, firstName, email, phoneNumber);
 		this.address = address;
 	}

@@ -4,7 +4,9 @@ import com.epam.renter.entities.Address;
 
 public interface IDAOAddress {
 	
-	public Address read(int idAddress);
+	public Address readByID(int idAddress);
+	
+	public Address readByAddress(String street, String houseNumber, String appartmentNumber);
 
 	public boolean create(Address address);
 	
