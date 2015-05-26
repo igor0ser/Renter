@@ -1,6 +1,6 @@
 package com.epam.renter.datasource;
 
-import com.epam.renter.datasource.dao.*;
+import com.epam.renter.dao.*;
 
 public class MySQLFactory {
 	public final IDAOAddress mySQLDAOAddress = new MySQLDAOAddress();

@@ -9,23 +9,23 @@ public abstract class AbstractUser implements Serializable {
 	public AbstractUser() {
 	}
 
-	public AbstractUser(String login, String password, String lastName,
-			String firstName, String email, String phoneNumber) {
+	public AbstractUser(String login, String password,String firstName, String lastName,
+			String email, String phoneNumber) {
 		this.login = login;
 		this.password = password;
-		this.lastName = lastName;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
 
-	public AbstractUser(int id, String login, String password, String lastName,
-			String firstName, String email, String phoneNumber) {
+	public AbstractUser(int id, String login, String password, String firstName, String lastName,
+			String email, String phoneNumber) {
 		this.id = id;
 		this.login = login;
 		this.password = password;
-		this.lastName = lastName;
 		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}

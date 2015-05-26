@@ -11,11 +11,9 @@ public class Runner {
 	public static void main(String[] args) {
 		System.out.println("Start");
 
-		if (DAOFactory.mySQLFactory.mySQLDAOUser.read("a1") != null) {
-			System.out.println("such user is exist");
-			
-		}
-		else{System.out.println("such user is not exist");}
+	
+		Address ad = DAOFactory.mySQLFactory.mySQLDAOAddress.readByID(1);
+		System.out.println(ad);
 
 		System.out.println("End");
 	}

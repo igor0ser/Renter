@@ -7,16 +7,16 @@ public class Worker extends AbstractUser {
 	public Worker() {
 	}
 
-	public Worker(String login, String password, String lastName,
-			String firstName, String email, String phoneNumber,
+	public Worker(String login, String password, String firstName,
+			String lastName, String email, String phoneNumber,
 			TypeOfWork typeOfWork) {
-		super(login, password, lastName, firstName, email, phoneNumber);
+		super(login, password, firstName, lastName, email, phoneNumber);
 		this.typeOfWork = typeOfWork;
 	}
 
-	public Worker(int id, String login, String password, String lastName,
-			String firstName, String email, String phoneNumber) {
-		super(id, login, password, lastName, firstName, email, phoneNumber);
+	public Worker(int id, String login, String password, String firstName,
+			String lastName, String email, String phoneNumber) {
+		super(id, login, password, firstName, lastName, email, phoneNumber);
 	}
 
 	private TypeOfWork typeOfWork;

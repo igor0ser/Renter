@@ -11,13 +11,13 @@ public class User extends AbstractUser {
 
 	public User(String login, String password, String firstName,
 			String lastName, String email, String phoneNumber, Address address) {
-		super(login, password, lastName, firstName, email, phoneNumber);
+		super(login, password, firstName, lastName, email, phoneNumber);
 		this.address = address;
 	}
 
 	public User(int id, String login, String password, String firstName,
 			String lastName, String email, String phoneNumber, Address address) {
-		super(id, login, password, lastName, firstName, email, phoneNumber);
+		super(id, login, password, firstName, lastName,  email, phoneNumber);
 		this.address = address;
 	}
 
