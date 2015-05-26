@@ -1,0 +1,97 @@
+body{
+background-image: url(images/backgr.jpg);
+background-size: cover;
+bgproperties="fixed";
+font: 1em 'PT Sans', Tahoma, Arial;
+margin: 0px;
+}
+
+@font-face {
+font-family: Tetra; 
+src: url(fonts/tetra.ttf); 
+}
+
+.title-container{
+background: MistyRose;
+height: 95px;
+width: 100%;
+position: absolute;
+border-bottom: 5px solid LightCyan;
+margin-top: -110px;
+}
+#title-string{
+font-family: Tetra;
+font-size: 500%;
+margin-left:10px;
+width: 200px;
+}
+
+ #login-form{
+display: inline-block;
+width:300px;
+margin-top:-85px;
+float:right;
+ }
+
+
+.center-container{
+padding: 10px;
+background: MistyRose;
+border: 5px solid LightCyan;
+width: 400px;
+border-radius: 10px;
+height: 100%;
+margin: auto;
+position: relative;
+line-height: 50px;
+margin-top: 110px;
+}
+
+table{
+margin: auto;
+}
+button{
+width: 100%;
+background: GhostWhite;
+font-size: 110%;
+border-radius: 7px;
+}
+#menu button{
+width: 200px;
+display: inline;
+}
+#menu{
+margin: auto;
+position: relative;
+margin-top:-85px;
+float:right;
+}
+
+select, input{
+width: 100%;
+font: 1em 'PT Sans', Tahoma, Arial;
+}
+
+
+.form-item .required:before,
+.form-item .required:after{
+    font-size: 14px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    color: #fff;
+    display: inline-block;
+    border-radius: 50%;
+}
+}
+.form-item input:valid + .required:before{
+    content: 'v';
+    background: #006400;     
+}
+.form-item input:invalid + .required:after{
+    content: 'x';
+    background: #f00;     
+}
+
+ 
