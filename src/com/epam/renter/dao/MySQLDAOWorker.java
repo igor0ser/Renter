@@ -7,11 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.renter.datasource.DataSource;
+import com.epam.renter.datasource.ConnectionPool;
+import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.entities.TypeOfWork;
 import com.epam.renter.entities.Worker;
 
-public class MySQLDAOWorker implements IDAOWorker {
+public class MySQLDAOWorker implements IDAOAbstractUser {
 
 	private static String READ_ALL_QUERY = "SELECT *  FROM workers;";
 	private static String READ_BY_ID_QUERY = "SELECT *  FROM workers WHERE idWorker=?;";
@@ -20,9 +21,9 @@ public class MySQLDAOWorker implements IDAOWorker {
 
 	
 	@Override
-	public Worker read(int idWorker) {
+	public Worker findByID(int idWorker) {
 		Worker worker = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_ID_QUERY);
 			preparedStatement.setInt(1, idWorker);
@@ -45,9 +46,9 @@ public class MySQLDAOWorker implements IDAOWorker {
 	}
 
 	@Override
-	public Worker read(String login) {
+	public Worker findByLogin(String login) {
 		Worker worker = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_LOGIN_QUERY);
 			preparedStatement.setString(1, login);
@@ -70,9 +71,9 @@ public class MySQLDAOWorker implements IDAOWorker {
 	}
 
 	@Override
-	public List<Worker> readAll() {
-		List<Worker> list = new ArrayList<Worker>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public List<AbstractUser> readAll() {
+		List<AbstractUser> list = new ArrayList<AbstractUser>();
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 		PreparedStatement preparedStatement = dbConnection
 				.prepareStatement(READ_ALL_QUERY);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -96,8 +97,9 @@ public class MySQLDAOWorker implements IDAOWorker {
 	}
 
 	@Override
-	public boolean create(Worker worker) {
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public boolean create(AbstractUser abstractUser) {
+		Worker worker = (Worker) abstractUser;
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setString(1, worker.getLogin());

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.epam.renter.datasource.ConnectionPool;
-import com.epam.renter.datasource.DataSource;
 import com.epam.renter.entities.Address;
 
 public class MySQLDAOAddress implements IDAOAddress {
@@ -16,9 +15,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 
 	public Address readByID(int idAddress) {
 		Address address = null;
-		Connection dbConnection = null;
-		try {
-			dbConnection = ConnectionPool.getInstance().getConnection();
+			try(Connection dbConnection= ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_ID_QUERY);
 			preparedStatement.setInt(1, idAddress);
@@ -31,11 +28,8 @@ public class MySQLDAOAddress implements IDAOAddress {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			if (dbConnection != null) {
-				ConnectionPool.getInstance().freeConnection(dbConnection);
-			}
-		}
+		} 
+		
 		return address;
 	}
 
@@ -43,9 +37,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 	public Address readByAddress(String street, String houseNumber,
 			String appartmentNumber) {
 		Address address = null;
-		Connection dbConnection = null;
-		try {
-			dbConnection = ConnectionPool.getInstance().getConnection();
+		try(Connection dbConnection = ConnectionPool.getInstance().getConnection()) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_ADDRESS_QUERY);
 			preparedStatement.setString(1, street);
@@ -61,16 +53,13 @@ public class MySQLDAOAddress implements IDAOAddress {
 			dbConnection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			if (dbConnection != null) {
-				ConnectionPool.getInstance().freeConnection(dbConnection);
-			}
-		}
+		} 
+		
 		return address;
 	}
 
 	public boolean create(Address address) {
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setString(1, address.getStreet());

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.service.ServiceAbstractUser;
 
-public class CommandLogIn implements ICommand {
+public class CommandCreateApplication implements ICommand {
 
 	private static final String LOGIN = "login";
-	private static final String PASSWORD = "password";
+	
   
 	
 	@Override
@@ -38,4 +38,3 @@ public class CommandLogIn implements ICommand {
 	}
 
 }
-

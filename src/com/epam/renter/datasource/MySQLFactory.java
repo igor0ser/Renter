@@ -7,11 +7,11 @@ public class MySQLFactory {
 	
 	public final IDAOApplication mySQLDAOApplication = new MySQLDAOApplication();
 	
-	public final IDAODispatcher mySQLDAODispatcher = new MySQLDAODispatcher();
+	public final IDAOAbstractUser mySQLDAODispatcher = new MySQLDAODispatcher();
 	
-	public final IDAOWorker mySQLDAOWorker = new MySQLDAOWorker();
+	public final IDAOAbstractUser mySQLDAOWorker = new MySQLDAOWorker();
 	
-	public final IDAOUser mySQLDAOUser = new MySQLDAOUser();
+	public final IDAOAbstractUser mySQLDAOUser = new MySQLDAOUser();
 	
 	
 }

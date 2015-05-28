@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.renter.datasource.DataSource;
+import com.epam.renter.datasource.ConnectionPool;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Status;
 import com.epam.renter.entities.TypeOfWork;
@@ -22,7 +22,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 	@Override
 	public List<Application> read(int userId) {
 		List<Application> applicationList = new ArrayList<>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_USER_ID_QUERY);
 			preparedStatement.setInt(1, userId);
@@ -54,7 +54,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 	@Override
 	public List<Application> read(Status status) {
 		List<Application> applicationList = new ArrayList<>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_STATUS_QUERY);
 			preparedStatement.setString(1, status.toString());
@@ -86,7 +86,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 	@Override
 	public List<Application> readAll() {
 		List<Application> applicationList = new ArrayList<>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_ALL_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -116,7 +116,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 
 	@Override
 	public boolean create(Application application) {
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setInt(1, application.getUser().getId());

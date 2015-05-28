@@ -1,14 +1,17 @@
 package com.epam.renter.command;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.renter.datasource.DAOFactory;
+import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
+import com.epam.renter.service.ServiceAbstractUser;
 
 public class CommandRegistration implements ICommand {
 
@@ -44,7 +47,7 @@ public class CommandRegistration implements ICommand {
 			return null;
 		}
 		
-		if(DAOFactory.mySQLFactory.mySQLDAOUser.read(login) != (null)){
+		if(!ServiceAbstractUser.isLoginFree(login)){
 			response.getWriter().println("such user is exist");
 			return null;
 		}
@@ -64,7 +67,11 @@ public class CommandRegistration implements ICommand {
 		
 		response.getWriter().println("user is created");
 		response.getWriter().println(user);
-		 
+		response.getWriter().println();
+		List<AbstractUser> list = DAOFactory.mySQLFactory.mySQLDAOUser.readAll();
+		for (AbstractUser worker : list) {
+			response.getWriter().println(worker);
+		}
 		
 	
 		return null;

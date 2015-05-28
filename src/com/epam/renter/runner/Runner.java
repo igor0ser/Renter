@@ -3,6 +3,10 @@ package com.epam.renter.runner;
 import java.util.Date;
 import java.util.List;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.*;
 
@@ -11,33 +15,42 @@ public class Runner {
 	public static void main(String[] args) {
 		System.out.println("Start");
 
-	
-		Address ad = DAOFactory.mySQLFactory.mySQLDAOAddress.readByID(1);
-		System.out.println(ad);
+		//userDAO();
 
+		
+		try {
+			InitialContext initContext = new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/renterdb");
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		System.out.println("End");
 	}
 
 	public static void userDAO() {
-		User w = new User("john", "1111", "John", "McLane", "jjjj@gmail.com",
+		User w = new User("ss", "1111", "John", "McLane", "jjjj@gmail.com",
 				"044-172-22-22", new Address(1, "", "", ""));
 
-		// boolean x = DAOFactory.mySQLFactory.mySQLDAOUser.create(w);
-		// System.out.println(x);
+		boolean x = DAOFactory.mySQLFactory.mySQLDAOUser.create(w);
+		 System.out.println(x);
 
-		List<User> list = DAOFactory.mySQLFactory.mySQLDAOUser.readAll();
-		for (User worker : list) {
+		List<AbstractUser> list = DAOFactory.mySQLFactory.mySQLDAOUser.readAll();
+		for (AbstractUser worker : list) {
 			System.out.println(worker);
+			
+			User w1	 = (User) DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin("Igor");
+			System.out.println("user");
+			System.out.println(w1);
 		}
 
-		User w1 = DAOFactory.mySQLFactory.mySQLDAOUser.read(2);
-		User w2 = DAOFactory.mySQLFactory.mySQLDAOUser.read("john");
 
-		System.out.println(w1);
-		System.out.println(w2);
 
 	}
-
+/*
 	public static void workerDAO() {
 		Worker w = new Worker("john", "1111", "John", "McLane",
 				"jjjj@gmail.com", "044-172-22-22", TypeOfWork.AIR_CONDITIONING);
@@ -117,5 +130,5 @@ public class Runner {
 		boolean x = DAOFactory.mySQLFactory.mySQLDAOAddress.create(address4);
 		System.out.println(x);
 	
-	}
+	}*/
 }

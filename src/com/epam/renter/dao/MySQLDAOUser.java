@@ -7,11 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.renter.datasource.DataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
+import com.epam.renter.datasource.ConnectionPool;
+import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.entities.User;
 
 
-public class MySQLDAOUser implements IDAOUser {
+public class MySQLDAOUser implements IDAOAbstractUser {
 
 	private static String READ_ALL_QUERY = "SELECT *  FROM users;";
 	private static String READ_BY_ID_QUERY = "SELECT *  FROM users WHERE idUser=?;";
@@ -19,9 +26,10 @@ public class MySQLDAOUser implements IDAOUser {
 	private static String CREATE_QUERY = "INSERT INTO users (login, password, lastName, firstName, email, phoneNumber, idAddress) VALUES (?,?,?,?,?,?,?);";
 
 	@Override
-	public User read(int idUser) {
+	public User findByID(int idUser) {
 		User user = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
+			
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_ID_QUERY);
 			preparedStatement.setInt(1, idUser);
@@ -43,9 +51,13 @@ public class MySQLDAOUser implements IDAOUser {
 	}
 
 	@Override
-	public User read(String login) {
+	public User findByLogin(String login) {
 		User user = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try {
+			InitialContext initContext= new InitialContext();
+			
+			DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/renterdb");
+			Connection dbConnection = ds.getConnection();
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_LOGIN_QUERY);
 			preparedStatement.setString(1, login);
@@ -60,16 +72,16 @@ public class MySQLDAOUser implements IDAOUser {
 				user.setPhoneNumber(resultSet.getString("phoneNumber"));
 				user.getAddress().setId(resultSet.getInt("idAddress"));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 		return user;
 	}
 
 	@Override
-	public List<User> readAll() {
-		List<User> list = new ArrayList<User>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public List<AbstractUser> readAll() {
+		List<AbstractUser> list = new ArrayList<AbstractUser>();
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_ALL_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -92,8 +104,15 @@ public class MySQLDAOUser implements IDAOUser {
 	}
 
 	@Override
-	public boolean create(User user) {
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public boolean create(AbstractUser abstractUser) {
+	
+		
+		//Connection dbConnection = ConnectionPool.getInstance().getConnection()
+		try {
+			InitialContext initContext= new InitialContext();
+			DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/renterdb");
+			Connection dbConnection = ds.getConnection();
+					User user = (User) abstractUser;
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setString(1, user.getLogin());
@@ -102,13 +121,14 @@ public class MySQLDAOUser implements IDAOUser {
 			preparedStatement.setString(4, user.getFirstName());
 			preparedStatement.setString(5, user.getEmail());
 			preparedStatement.setString(6, user.getPhoneNumber());
-			preparedStatement.setInt(7, user.getAddress().getId());
+			preparedStatement.setInt(7,  user.getAddress().getId());
 			preparedStatement.execute();
 			return true;
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 			return false;
 		}
+		
 	}
 
 }

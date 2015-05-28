@@ -113,7 +113,7 @@ width: 88%;
 	 display: inline-block;
 }
 
-.reg-input nput:valid + .required:before{
+.reg-input input:valid + .required:before{
     content: 'V';
     background: #7CCD7C;  
  }	

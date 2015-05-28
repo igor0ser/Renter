@@ -7,19 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.renter.datasource.DataSource;
+import com.epam.renter.datasource.ConnectionPool;
+import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.entities.Dispatcher;
 
-public class MySQLDAODispatcher implements IDAODispatcher {
+public class MySQLDAODispatcher implements IDAOAbstractUser {
 	private static String READ_ALL_QUERY = "SELECT *  FROM dispatchers;";
 	private static String READ_BY_ID_QUERY = "SELECT *  FROM dispatchers WHERE idDispatcher=?;";
 	private static String READ_BY_LOGIN_QUERY = "SELECT * FROM dispatchers WHERE login=?;";
 	private static String CREATE_QUERY = "INSERT INTO dispatchers (login, password, lastName, firstName, email, phoneNumber) VALUES (?,?,?,?,?,?);";
 
 	@Override
-	public Dispatcher read(int idDispatcher) {
+	public Dispatcher findByID(int idDispatcher) {
 		Dispatcher dispatcher = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_ID_QUERY);
 			preparedStatement.setInt(1, idDispatcher);
@@ -40,9 +41,9 @@ public class MySQLDAODispatcher implements IDAODispatcher {
 	}
 
 	@Override
-	public Dispatcher read(String login) {
+	public Dispatcher findByLogin(String login) {
 		Dispatcher dispatcher = null;
-		try (Connection dbConnection = DataSource.getConnection();) {
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(READ_BY_LOGIN_QUERY);
 			preparedStatement.setString(1, login);
@@ -64,9 +65,9 @@ public class MySQLDAODispatcher implements IDAODispatcher {
 	}
 	
 	@Override
-	public List<Dispatcher> readAll() {
-		List<Dispatcher> list = new ArrayList<Dispatcher>();
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public List<AbstractUser> readAll() {
+		List<AbstractUser> list = new ArrayList<AbstractUser>();
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 		PreparedStatement preparedStatement = dbConnection
 				.prepareStatement(READ_ALL_QUERY);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -88,8 +89,9 @@ public class MySQLDAODispatcher implements IDAODispatcher {
 		
 	}
 	@Override
-	public boolean create(Dispatcher dispatcher) {
-		try (Connection dbConnection = DataSource.getConnection();) {
+	public boolean create(AbstractUser abstractUser) {
+		Dispatcher dispatcher = (Dispatcher) abstractUser;
+		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setString(1, dispatcher.getLogin());
