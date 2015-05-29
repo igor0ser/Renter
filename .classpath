@@ -16,5 +16,9 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Admin/Desktop/jo/WorkspaceEE/Renter/lib/mysql-connector-java-5.1.35-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jo/WorkspaceEE/Renter/lib/commons-dbcp2-2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jo/WorkspaceEE/Renter/lib/commons-dbcp2-2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp2-2.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/commons-dbcp2-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jo/WorkspaceEE/Renter/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jo/WorkspaceEE/Renter/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

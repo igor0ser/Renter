@@ -31,7 +31,8 @@ public class CommandLogIn implements ICommand {
 			response.getWriter().println("Wrong password");
 		} else {
 			request.getSession().setAttribute(LOGIN, login);
-			request.getRequestDispatcher("application.jsp").forward(request,
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("welcome.jsp").forward(request,
 					response);
 		}
 

@@ -61,12 +61,9 @@ public class CommandRegistration implements ICommand {
 			DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
 			request.getSession().setAttribute(LOGIN, login);
 			request.getSession().setAttribute(NAME, name);
-			
-			response.getWriter().println(user);
-			response.getWriter().println(address);
-			
-			response.getWriter().println(request.getSession().getAttribute(LOGIN));
-			response.getWriter().println(request.getSession().getAttribute(NAME));
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("welcome.jsp").forward(request,
+					response);			
 		}else{
 			response.getWriter().println("Something goes wrong!!!");
 		}
