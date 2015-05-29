@@ -54,7 +54,6 @@ else return true;
 <input type="hidden" name="command" value ="registration"/>
 <table>
 <tr ><td>Login:</td>
-<div >
 <td class="reg-input"><input type="text" name="login" required>
 <span class="required"></span></td></tr>
 <tr><td>Password:</td>
@@ -66,11 +65,11 @@ else return true;
 <tr><td>Email:</td>
 <td class="reg-input"><input type="email" name="email" required>
 <span class="required"></span></td></tr>
-<tr><td>First Name:</td>
-<td class="reg-input"><input type="text" name="first_name" required>
+<tr><td>Name:</td>
+<td class="reg-input"><input type="text" name="name" required>
 <span class="required"></span></td></tr>
-<tr><td>Last Name:</td>
-<td class="reg-input"><input type="text" name="last_name" required>
+<tr><td>Surname:</td>
+<td class="reg-input"><input type="text" name="surname" required>
 <span class="required"></span></td></tr>
 <tr><td>Phone Number:</td>
 <td class="reg-input"><input type="tel" name="phone_number" required>
@@ -80,10 +79,10 @@ else return true;
 <td class="reg-input"><input type="text" name="street" required>
 <span class="required"></span></td></tr>
 <tr ><td>House number:</td>
-<td class="reg-input"><input type="text" name="house_number" required>
+<td class="reg-input"><input type="text" name="house" required>
 <span class="required"></span></td></tr>
 <tr ><td>Appartment number: </td>
-<td class="reg-input"><input type="text" name="appartment_number" required>
+<td class="reg-input"><input type="text" name="appartment" required>
 <span class="required"></span></td></tr>
 <tr><td colspan = "2"  align = "center">
 <button  name="registatin" type="submit">Submit</button></td></tr>

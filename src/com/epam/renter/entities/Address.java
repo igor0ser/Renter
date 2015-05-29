@@ -2,65 +2,74 @@ package com.epam.renter.entities;
 
 import java.io.Serializable;
 
-public class Address implements Serializable{
+public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	public Address() {
 	}
 
-	public Address(String street, String house, String appartment) {
-		super();
+	public Address(String street, String house, String appartment, User user) {
 		this.street = street;
 		this.house = house;
 		this.appartment = appartment;
+		this.user = user;
 	}
 
-	public Address(int id, String street, String house, String appartment) {
-		super();
+	public Address(int id, String street, String house, String appartment,
+			User user) {
 		this.id = id;
 		this.street = street;
 		this.house = house;
 		this.appartment = appartment;
+		this.user = user;
 	}
 
 	private int id;
 	private String street;
 	private String house;
 	private String appartment;
+	private User user;
 
 	public int getId() {
 		return id;
 	}
-	
-	public String getStreet() {
-		return street;
-	}
-	
-	public String getHouse() {
-		return house;
-	}
-	
-	public String getAppartment() {
-		return appartment;
-	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	public String getStreet() {
+		return street;
+	}
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	
+
+	public String getHouse() {
+		return house;
+	}
+
 	public void setHouse(String house) {
 		this.house = house;
 	}
-	
+
+	public String getAppartment() {
+		return appartment;
+	}
+
 	public void setAppartment(String appartment) {
 		this.appartment = appartment;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {
@@ -69,7 +78,9 @@ public class Address implements Serializable{
 		result = prime * result
 				+ ((appartment == null) ? 0 : appartment.hashCode());
 		result = prime * result + ((house == null) ? 0 : house.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -92,19 +103,25 @@ public class Address implements Serializable{
 				return false;
 		} else if (!house.equals(other.house))
 			return false;
+		if (id != other.id)
+			return false;
 		if (street == null) {
 			if (other.street != null)
 				return false;
 		} else if (!street.equals(other.street))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Address [street=" + street + ", house=" + house
-				+ ", appartment=" + appartment + "]";
+		return "Address [id=" + id + ", street=" + street + ", house=" + house
+				+ ", appartment=" + appartment + ", user=" + user + "]";
 	}
-
 
 }

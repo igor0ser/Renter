@@ -4,9 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.epam.renter.command.CommandLogIn;
-import com.epam.renter.command.CommandRegistration;
-import com.epam.renter.command.ICommand;
+import com.epam.renter.command.*;
 
 public class ControllerHelper {
 

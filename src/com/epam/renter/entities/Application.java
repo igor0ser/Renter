@@ -1,115 +1,128 @@
 package com.epam.renter.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Application {
+public class Application implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
-	public Application(){
-		this.user = new User();
-		this.worker = new Worker();
-	};
-	
-	public Application(User user, Date desirableDate, String about,
-			TypeOfWork typeOfWork) {
-		this.user = user;
-		this.creationDate = new Date();
-		this.desirableDate = desirableDate;
-		this.about = about;
-		this.status = Status.CREATED;
-		this.typeOfWork = typeOfWork;
+	public Application() {
 	}
-	
-	public Application(int id, User user, Date desirableDate, String about,
-			TypeOfWork typeOfWork) {
+
+	public Application(User user, String about, Status status,
+			TypeOfWork typeOfWork, Date desirable) {
+		this.user = user;
+		this.about = about;
+		this.status = status;
+		this.typeOfWork = typeOfWork;
+		this.creation = new Date();
+		this.desirable = desirable;
+	}
+
+	public Application(int id, User user, String about, Status status,
+			TypeOfWork typeOfWork, Date creation, Date desirable,
+			Date complete, Date start, Date end) {
 		this.id = id;
 		this.user = user;
-		this.creationDate = new Date();
-		this.desirableDate = desirableDate;
 		this.about = about;
-		this.status = Status.CREATED;
+		this.status = status;
 		this.typeOfWork = typeOfWork;
+		this.creation = creation;
+		this.desirable = desirable;
+		this.complete = complete;
+		this.start = start;
+		this.end = end;
 	}
 
 	private int id;
 	private User user;
 	private String about;
-	private Date creationDate;
-	private Date desirableDate;
-	private Date completeDate;
 	private Status status;
-	private Worker worker;
 	private TypeOfWork typeOfWork;
-	
+	private Date creation;
+	private Date desirable;
+	private Date complete;
+	private Date start;
+	private Date end;
 	public int getId() {
 		return id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public String getAbout() {
-		return about;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public Date getDesirableDate() {
-		return desirableDate;
-	}
-
-	public Date getCompleteDate() {
-		return completeDate;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public Worker getWorker() {
-		return worker;
-	}
-
-	public TypeOfWork getTypeOfWork() {
-		return typeOfWork;
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getAbout() {
+		return about;
 	}
 
 	public void setAbout(String about) {
 		this.about = about;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public void setDesirableDate(Date desirableDate) {
-		this.desirableDate = desirableDate;
-	}
-
-	public void setCompleteDate(Date completeDate) {
-		this.completeDate = completeDate;
+	public Status getStatus() {
+		return status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public void setWorker(Worker worker) {
-		this.worker = worker;
+	public TypeOfWork getTypeOfWork() {
+		return typeOfWork;
 	}
 
 	public void setTypeOfWork(TypeOfWork typeOfWork) {
 		this.typeOfWork = typeOfWork;
+	}
+
+	public Date getCreation() {
+		return creation;
+	}
+
+	public void setCreation(Date creation) {
+		this.creation = creation;
+	}
+
+	public Date getDesirable() {
+		return desirable;
+	}
+
+	public void setDesirable(Date desirable) {
+		this.desirable = desirable;
+	}
+
+	public Date getComplete() {
+		return complete;
+	}
+
+	public void setComplete(Date complete) {
+		this.complete = complete;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(Date end) {
+		this.end = end;
 	}
 
 	@Override
@@ -118,16 +131,18 @@ public class Application {
 		int result = 1;
 		result = prime * result + ((about == null) ? 0 : about.hashCode());
 		result = prime * result
-				+ ((completeDate == null) ? 0 : completeDate.hashCode());
+				+ ((complete == null) ? 0 : complete.hashCode());
 		result = prime * result
-				+ ((creationDate == null) ? 0 : creationDate.hashCode());
+				+ ((creation == null) ? 0 : creation.hashCode());
 		result = prime * result
-				+ ((desirableDate == null) ? 0 : desirableDate.hashCode());
+				+ ((desirable == null) ? 0 : desirable.hashCode());
+		result = prime * result + ((end == null) ? 0 : end.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((typeOfWork == null) ? 0 : typeOfWork.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((worker == null) ? 0 : worker.hashCode());
 		return result;
 	}
 
@@ -145,20 +160,32 @@ public class Application {
 				return false;
 		} else if (!about.equals(other.about))
 			return false;
-		if (completeDate == null) {
-			if (other.completeDate != null)
+		if (complete == null) {
+			if (other.complete != null)
 				return false;
-		} else if (!completeDate.equals(other.completeDate))
+		} else if (!complete.equals(other.complete))
 			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
+		if (creation == null) {
+			if (other.creation != null)
 				return false;
-		} else if (!creationDate.equals(other.creationDate))
+		} else if (!creation.equals(other.creation))
 			return false;
-		if (desirableDate == null) {
-			if (other.desirableDate != null)
+		if (desirable == null) {
+			if (other.desirable != null)
 				return false;
-		} else if (!desirableDate.equals(other.desirableDate))
+		} else if (!desirable.equals(other.desirable))
+			return false;
+		if (end == null) {
+			if (other.end != null)
+				return false;
+		} else if (!end.equals(other.end))
+			return false;
+		if (id != other.id)
+			return false;
+		if (start == null) {
+			if (other.start != null)
+				return false;
+		} else if (!start.equals(other.start))
 			return false;
 		if (status != other.status)
 			return false;
@@ -169,21 +196,18 @@ public class Application {
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
-		if (worker == null) {
-			if (other.worker != null)
-				return false;
-		} else if (!worker.equals(other.worker))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Application [id=" + id + ", user=" + user + ", about=" + about
-				+ ", creationDate=" + creationDate + ", desirableDate="
-				+ desirableDate + ", completeDate=" + completeDate
-				+ ", status=" + status + ", worker=" + worker + ", typeOfWork="
-				+ typeOfWork + "]";
+				+ ", status=" + status + ", typeOfWork=" + typeOfWork
+				+ ", creation=" + creation + ", desirable=" + desirable
+				+ ", complete=" + complete + ", start=" + start + ", end="
+				+ end + "]";
 	}
 
+	
+	
 }

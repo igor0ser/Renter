@@ -1,82 +1,76 @@
 package com.epam.renter.command;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.renter.datasource.DAOFactory;
-import com.epam.renter.entities.AbstractUser;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
-import com.epam.renter.service.ServiceAbstractUser;
 
 public class CommandRegistration implements ICommand {
-
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
 	private static final String REPEAT_PASSWORD = "repeat_password";
+	private static final String NAME = "name";
+	private static final String SURNAME = "surname";
 	private static final String EMAIL = "email";
-	private static final String FIRST_NAME = "first_name";
-	private static final String LAST_NAME = "last_name";
 	private static final String PHONE_NUMBER = "phone_number";
 	private static final String STREET = "street";
-	private static final String HOUSE_NUMBER = "house_number";
-	private static final String APPARTMENT_NUMBER = "appartment_number";
-	
-  
-	
+	private static final String HOUSE = "house";
+	private static final String APPARTMENT = "appartment";
+
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(LOGIN);
+
+		if (DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login) != null) {
+			response.getWriter()
+					.println("Sorry, this login is already in use!");
+			return null;
+		}
+
 		String password = request.getParameter(PASSWORD);
 		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
+
+		if (!password.equals(repeatPassword)) {
+			response.getWriter().println(
+					"Password doesn't equals repeated password!");
+			return null;
+		}
+		String name = request.getParameter(NAME);
+		String surname = request.getParameter(SURNAME);
 		String email = request.getParameter(EMAIL);
-		String firstName = request.getParameter(FIRST_NAME);
-		String lastName = request.getParameter(LAST_NAME);
+		
+		response.getWriter().println(surname);
 		String phoneNumber = request.getParameter(PHONE_NUMBER);
 		String street = request.getParameter(STREET);
-		String houseNumber = request.getParameter(HOUSE_NUMBER);
-		String appartmentNumber = request.getParameter(APPARTMENT_NUMBER);
-		
-		if (!password.equals(repeatPassword)){
-			response.getWriter().println("Password not equals to repeat_password");
-			return null;
-		}
-		
-		if(!ServiceAbstractUser.isLoginFree(login)){
-			response.getWriter().println("such user is exist");
-			return null;
-		}
-		
-		response.getWriter().println("go to DAO");
-		Address address= new Address(street, houseNumber, appartmentNumber);
-		DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
-		
-		response.getWriter().println("address is created");
-		response.getWriter().println(address);
-		
-		address =DAOFactory.mySQLFactory.mySQLDAOAddress.readByAddress(street, houseNumber, appartmentNumber);
-		
-		
-		User user = new User(login, password, firstName, lastName, email, phoneNumber, address);
-		DAOFactory.mySQLFactory.mySQLDAOUser.create(user);
-		
-		response.getWriter().println("user is created");
+		String houseNumber = request.getParameter(HOUSE);
+		String appartmentNumber = request.getParameter(APPARTMENT);
+
+		User user = new User(login, password, name, surname, email, phoneNumber);
 		response.getWriter().println(user);
-		response.getWriter().println();
-		List<AbstractUser> list = DAOFactory.mySQLFactory.mySQLDAOUser.readAll();
-		for (AbstractUser worker : list) {
-			response.getWriter().println(worker);
+		response.getWriter().println("start");
+		if (DAOFactory.mySQLFactory.mySQLDAOUser.create(user)) {
+			user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
+			Address address = new Address(street, houseNumber,
+					appartmentNumber, user);
+			DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
+			request.getSession().setAttribute(LOGIN, login);
+			request.getSession().setAttribute(NAME, name);
+			
+			response.getWriter().println(user);
+			response.getWriter().println(address);
+			
+			response.getWriter().println(request.getSession().getAttribute(LOGIN));
+			response.getWriter().println(request.getSession().getAttribute(NAME));
+		}else{
+			response.getWriter().println("Something goes wrong!!!");
 		}
-		
-	
+
 		return null;
-		
 	}
-
 }
-

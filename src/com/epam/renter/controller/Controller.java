@@ -12,28 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public Controller() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String x = request.getParameter("command");
-		//response.getWriter().print(x);
-		
-		ControllerHelper.getInstance().getCommand(request).execute(request, response);
-		
-		//String x = request.getParameter("command");
-		//response.getWriter().print(x);
-		//new CommandLogIn().execute(request, response);
+	public Controller() {
+		super();
 	}
 
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ControllerHelper.getInstance().getCommand(request)
+				.execute(request, response);
 
 	}
 
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 
-	
+	}
+
 }

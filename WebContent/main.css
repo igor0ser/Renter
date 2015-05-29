@@ -137,5 +137,9 @@ width: 88%;
 #hello{font-size: 100%;
 line-height: 25px;
 text-align:  center;
+}
 
+#welcome_user{
+text-align:center;
+height: 250px;
 }
