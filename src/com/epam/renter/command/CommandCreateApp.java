@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +49,10 @@ public class CommandCreateApp implements ICommand {
 		
 		if (flag){
 			request.getRequestDispatcher("thank_you.jsp").forward(request,
+					response);
+		}
+		else{
+			request.getRequestDispatcher("error.jsp").forward(request,
 					response);
 		}
 		

@@ -15,6 +15,7 @@ public class ControllerHelper {
 
 	private ControllerHelper() {
 		commands.put("login", new CommandLogIn());
+		commands.put("logout", new CommandLogOut());
 		commands.put("registration", new CommandRegistration());
 		commands.put("see_app_user", new CommandSeeAppUser());
 		commands.put("create_app", new CommandCreateApp());

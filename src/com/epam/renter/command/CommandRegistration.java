@@ -27,25 +27,29 @@ public class CommandRegistration implements ICommand {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(LOGIN);
-
-		if (DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login) != null) {
-			response.getWriter()
-					.println("Sorry, this login is already in use!");
-			return null;
-		}
-
 		String password = request.getParameter(PASSWORD);
 		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
 
 		if (!password.equals(repeatPassword)) {
-			response.getWriter().println(
-					"Password doesn't equals repeated password!");
+			request.setAttribute("error",
+					"Password doesn't equals to Repeat Password!");
+			request.getRequestDispatcher("error_login.jsp").forward(request,
+					response);
 			return null;
 		}
+
+		if (DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login) != null) {
+			request.setAttribute("error",
+					"Sorry, this login is already in use!");
+			request.getRequestDispatcher("error_login.jsp").forward(request,
+					response);
+			return null;
+		}
+
 		String name = request.getParameter(NAME);
 		String surname = request.getParameter(SURNAME);
 		String email = request.getParameter(EMAIL);
-		
+
 		response.getWriter().println(surname);
 		String phoneNumber = request.getParameter(PHONE_NUMBER);
 		String street = request.getParameter(STREET);
@@ -53,8 +57,6 @@ public class CommandRegistration implements ICommand {
 		String appartmentNumber = request.getParameter(APPARTMENT);
 
 		User user = new User(login, password, name, surname, email, phoneNumber);
-		response.getWriter().println(user);
-		response.getWriter().println("start");
 		if (DAOFactory.mySQLFactory.mySQLDAOUser.create(user)) {
 			user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 			Address address = new Address(street, houseNumber,
@@ -65,9 +67,13 @@ public class CommandRegistration implements ICommand {
 			request.getSession().setAttribute(USER_ID, user.getId());
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("welcome.jsp").forward(request,
-					response);			
-		}else{
-			response.getWriter().println("Something goes wrong!!!");
+					response);
+		} else {
+			request.setAttribute("error",
+					"Sorry, something goes wrong :( Please try again later.");
+			request.getRequestDispatcher("error_login.jsp").forward(request,
+					response);
+			return null;
 		}
 
 		return null;

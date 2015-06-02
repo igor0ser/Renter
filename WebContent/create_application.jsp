@@ -38,7 +38,7 @@
 				</tr>
 				<tr>
 					<td>Desirable time of execution:</td>
-					<td class="reg-input"><input name="desirable"
+					<td class="calendar" class="reg-input"><input name="desirable"
 						type="datetime-local" name="calendar" required> <span
 						class="required"></span></td>
 				</tr>

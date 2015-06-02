@@ -14,13 +14,11 @@
 
 <%@include file="title-menu.jsp" %>
 
-<div class= "center-container animated fadeInUpBig">
+<div class= "center-container">
 <div id="message-container">
-<b>Hello, 
-<c:out value="${sessionScope.login}"></c:out>
-!
-</b><br>
-<b>Welcome, to our site!<b>
+<b><span>Some errors happened :(</span>
+Please try again.</b>
+<button  onClick="history.back()">Back to Create Application</button>
 </div>
 </div>
 </body>

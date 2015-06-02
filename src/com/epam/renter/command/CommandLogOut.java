@@ -12,6 +12,8 @@ public class CommandLogOut implements ICommand {
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
+		request.getRequestDispatcher("index.jsp").forward(request,
+				response);
 		// TODO Auto-generated method stub
 		return null;
 	}

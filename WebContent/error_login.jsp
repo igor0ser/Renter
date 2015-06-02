@@ -12,15 +12,21 @@
 </head>
 <body>
 
-<%@include file="title-menu.jsp" %>
+<div class = "title-container">
+<div id = "title-string">RENTER</div>
 
-<div class= "center-container animated fadeInUpBig">
+<div id = "language">
+<button  name="application" type="submit">EN</button>
+<button  name="application" type="submit">RU</button>
+</div>
+</div>
+
+<div class= "center-container">
 <div id="message-container">
-<b>Hello, 
-<c:out value="${sessionScope.login}"></c:out>
-!
-</b><br>
-<b>Welcome, to our site!<b>
+<b><c:out value="${error}">Some errors happened :( Sorry!)</c:out></b>
+
+<button  onClick="history.back()">Back to start page</button>
+
 </div>
 </div>
 </body>

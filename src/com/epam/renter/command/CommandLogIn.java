@@ -26,10 +26,16 @@ public class CommandLogIn implements ICommand {
 		User user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 
 		if (user == null) {
-			response.getWriter().println("Wrong login");
+			request.setAttribute("error",
+					"Wrong login");
+			request.getRequestDispatcher("error_login.jsp").forward(request,
+					response);
 			
 		} else if (!user.getPassword().equals(password)) {
-			response.getWriter().println("Wrong password");
+			request.setAttribute("error",
+					"Wrong password");
+			request.getRequestDispatcher("error_login.jsp").forward(request,
+					response);
 		} else {
 			request.setAttribute("user", user);
 			request.getSession().setAttribute(LOGIN, login);

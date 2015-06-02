@@ -44,7 +44,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 			preparedStatement.setString(1, address.getStreet());
 			preparedStatement.setString(2, address.getHouse());
 			preparedStatement.setString(3, address.getAppartment());
-			preparedStatement.setInt(3, address.getUser().getId());
+			preparedStatement.setInt(4, address.getUser().getId());
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
