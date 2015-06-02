@@ -14,6 +14,7 @@ public class CommandLogIn implements ICommand {
 
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
+	private static final String USER_ID = "user_id";
 
 
 	@Override
@@ -30,8 +31,9 @@ public class CommandLogIn implements ICommand {
 		} else if (!user.getPassword().equals(password)) {
 			response.getWriter().println("Wrong password");
 		} else {
-			request.getSession().setAttribute(LOGIN, login);
 			request.setAttribute("user", user);
+			request.getSession().setAttribute(LOGIN, login);
+			request.getSession().setAttribute(USER_ID, user.getId());
 			request.getRequestDispatcher("welcome.jsp").forward(request,
 					response);
 		}

@@ -1,145 +1,183 @@
-body{
-background-image: url(images/backgr.jpg);
-
-bgproperties="fixed";
-font: 1em 'PT Sans', Tahoma, Arial;
-margin: 0px;
+body {
+	background-image: url(images/backgr.jpg); bgproperties ="fixed";
+	font: 1em 'PT Sans', Tahoma, Arial;
+	margin: 0px;
 }
 
 @font-face {
-font-family: Tetra; 
-src: url(fonts/tetra.ttf); 
+	font-family: Tetra;
+	src: url(fonts/tetra.ttf);
 }
 
-.title-container{
-background: MistyRose;
-height: 95px;
-width: 100%;
-position: absolute;
-border-bottom: 5px solid LightCyan;
-margin-top: -110px;
-}
-#title-string{
-font-family: Tetra;
-font-size: 500%;
-margin-left:10px;
-width: 200px;
+.title-container {
+	background: MistyRose;
+	height: 95px;
+	width: 100%;
+	position: absolute;
+	border-bottom: 5px solid LightCyan;
+	margin-top: -110px;
 }
 
- #login-form{
-display: inline-block;
-width:300px;
-margin-top:-85px;
-margin-right:50px;
-float:right;
- }
-
-
-
-.center-container{
-padding: 10px;
-background: MistyRose;
-border: 5px solid LightCyan;
-width: 400px;
-border-radius: 10px;
-height: 100%;
-margin: auto;
-position: relative;
-line-height: 50px;
-margin-top: 110px;
+#title-string {
+	font-family: Tetra;
+	font-size: 500%;
+	margin-left: 10px;
+	width: 200px;
 }
 
-table{
-margin: auto;
-}
-button{
-width: 100%;
-background: GhostWhite;
-font-size: 110%;
-border-radius: 7px;
+#login-form {
+	display: inline-block;
+	width: 300px;
+	margin-top: -85px;
+	margin-right: 50px;
+	float: right;
 }
 
-#menu button{
-width: 200px;
-display: inline;
-}
-#menu{
-position: relative;
-text-align: center;
-min-width:650px;
-margin-top:-30px;
-}
-
-
-#language button{
-width: 40px;
-display: inline;
-font-family: Tetra; 
-height:40px;
-}
-#language{
-margin: auto;
-margin-right:5px;
-position: relative;
-margin-top:-85px;
-float:right;
-
+.center-container {
+	padding: 10px;
+	background: MistyRose;
+	border: 5px solid LightCyan;
+	width: 400px;
+	border-radius: 10px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	line-height: 50px;
+	margin-top: 110px;
 }
 
-select, input{
-width: 100%;
-font: 1em 'PT Sans', Tahoma, Arial;
+.appplication-container {
+	padding: 10px;
+	background: MistyRose;
+	border: 5px solid LightCyan;
+	width: 1000px;
+	border-radius: 10px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	line-height: 50px;
+	margin-top: 110px;
 }
 
-#app-form input{
-width: 80%;
-}
-#app-form  select{
-width: 82%;
-}
-#reg-form input{
-width: 88%;
+.app-table {
+	border-spacing: 0px;
+	border: 1px solid black;
+	padding: 2px;
 }
 
-.reg-input .required:before,
-.reg-input .required:after{
-    font-size: 14px;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
-    text-align: center;
-    color: #fff;
-    border-radius: 50%;
-	 display: inline-block;
+.about {
+	width: 400px;
 }
 
-.reg-input input:valid + .required:before{
-    content: 'V';
-    background: #7CCD7C;  
- }	
-
-.reg-input input:invalid + .required:after{
-    content: 'X';
-    background: #63B8FF;   
-}
- 
- .reg-input select:valid + .required:before{
-    content: 'V';
-    background: #7CCD7C;  
- }
-
-.reg-input select:invalid + .required:after{
-    content: 'X';
-    background: #63B8FF;   
+.app-table td {
+	padding: 5px;
+	line-height: 30px;
 }
 
- 
-#hello{font-size: 100%;
-line-height: 25px;
-text-align:  center;
+.app-table th {
+	width: 100px;
+	padding: 5px;
 }
 
-#welcome_user{
-text-align: center;
-height: 250px;
+.time {
+	text-align: center;
+}
+
+table {
+	margin: auto;
+}
+
+button {
+	width: 100%;
+	background: GhostWhite;
+	font-size: 110%;
+	border-radius: 7px;
+}
+
+#menu button {
+	width: 200px;
+	display: inline;
+	text-decoration: underline;
+}
+
+#menu {
+	position: relative;
+	text-align: center;
+	min-width: 650px;
+	margin-top: -30px;
+	
+}
+
+#language button {
+	width: 40px;
+	display: inline;
+	font-family: Tetra;
+	height: 40px;
+}
+
+#language {
+	margin: auto;
+	margin-right: 5px;
+	position: relative;
+	margin-top: -85px;
+	float: right;
+}
+
+select, input {
+	width: 100%;
+	font: 1em 'PT Sans', Tahoma, Arial;
+}
+
+#app-form input {
+	width: 80%;
+}
+
+#app-form  select {
+	width: 82%;
+}
+
+#reg-form input {
+	width: 88%;
+}
+
+.reg-input .required:before, .reg-input .required:after {
+	font-size: 14px;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.reg-input input:valid+.required:before {
+	content: 'V';
+	background: #7CCD7C;
+}
+
+.reg-input input:invalid+.required:after {
+	content: 'X';
+	background: #63B8FF;
+}
+
+.reg-input select:valid+.required:before {
+	content: 'V';
+	background: #7CCD7C;
+}
+
+.reg-input select:invalid+.required:after {
+	content: 'X';
+	background: #63B8FF;
+}
+
+#hello {
+	font-size: 100%;
+	line-height: 25px;
+	text-align: center;
+}
+
+#welcome_user {
+	text-align: center;
+	height: 250px;
 }

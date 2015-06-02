@@ -47,7 +47,7 @@
 </div>
 <div class= "center-container animated fadeInUpBig">
 <div id="welcome_user">
-</br><b>Hello, 
+</br><b>Thank you, 
 <c:out value="${sessionScope.login}"></c:out>
 !
 </b><br>

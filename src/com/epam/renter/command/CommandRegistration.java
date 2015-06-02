@@ -21,6 +21,7 @@ public class CommandRegistration implements ICommand {
 	private static final String STREET = "street";
 	private static final String HOUSE = "house";
 	private static final String APPARTMENT = "appartment";
+	private static final String USER_ID = "user_id";
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -61,6 +62,7 @@ public class CommandRegistration implements ICommand {
 			DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
 			request.getSession().setAttribute(LOGIN, login);
 			request.getSession().setAttribute(NAME, name);
+			request.getSession().setAttribute(USER_ID, user.getId());
 			request.setAttribute("user", user);
 			request.getRequestDispatcher("welcome.jsp").forward(request,
 					response);			

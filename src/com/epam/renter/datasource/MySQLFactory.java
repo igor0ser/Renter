@@ -7,4 +7,7 @@ public class MySQLFactory {
 	public final IDAOUser mySQLDAOUser = new MySQLDAOUser();
 	
 	public final IDAOAddress mySQLDAOAddress = new MySQLDAOAddress();
+	
+	public final IDAOApplication mySQLDAOApplication  = new MySQLDAOApplication ();
+	
 }

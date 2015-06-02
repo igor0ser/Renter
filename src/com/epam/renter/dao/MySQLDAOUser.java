@@ -32,8 +32,7 @@ public class MySQLDAOUser implements IDAOUser {
 				user.setSurname(resultSet.getString("surname"));
 				user.setEmail(resultSet.getString("email"));
 				user.setPhoneNumber(resultSet.getString("phoneNumber"));
-				user.getAddress().setId(resultSet.getInt("idAddress"));
-			}
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,8 +57,7 @@ public class MySQLDAOUser implements IDAOUser {
 				user.setSurname(resultSet.getString("surname"));
 				user.setEmail(resultSet.getString("email"));
 				user.setPhoneNumber(resultSet.getString("phoneNumber"));
-				user.getAddress().setId(resultSet.getInt("idAddress"));
-			}
+				}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

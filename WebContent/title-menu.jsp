@@ -14,10 +14,6 @@
 
 <div class = "title-container">
 <div id = "title-string" >RENTER</div>
-
-
-
-
 <div id = "language">
 <button  name="application" type="submit">EN</button></br>
 <button  name="application" type="submit">RU</button></br>
@@ -43,15 +39,10 @@
 </tbody>
 </table>
 </div>
+</div>
 
-</div>
-<div class= "center-container animated fadeInUpBig">
-<div id="welcome_user">
-</br><b>Hello, 
-<c:out value="${sessionScope.login}"></c:out>
-!
-</b><br>
-<b>Welcome, to our site!<b>
-</div>
-</div>
+
+
+
+
 </body>

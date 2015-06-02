@@ -8,13 +8,14 @@ public class Application implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public Application() {
+		this.user = new User();
 	}
 
-	public Application(User user, String about, Status status,
+	public Application(User user, String about, 
 			TypeOfWork typeOfWork, Date desirable) {
 		this.user = user;
 		this.about = about;
-		this.status = status;
+		this.status = Status.CREATED;
 		this.typeOfWork = typeOfWork;
 		this.creation = new Date();
 		this.desirable = desirable;
