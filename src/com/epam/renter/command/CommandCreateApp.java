@@ -28,6 +28,7 @@ public class CommandCreateApp implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
 		
 		String about = request.getParameter(ABOUT);

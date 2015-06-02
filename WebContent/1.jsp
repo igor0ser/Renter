@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<%@include file="title-menu.jsp.jsp" %>
+<%@include file="title-menu.jsp" %>
 
 <div class= "center-container animated fadeInUpBig">
 <div id="welcome_user">

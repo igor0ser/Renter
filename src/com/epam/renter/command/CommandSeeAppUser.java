@@ -19,13 +19,15 @@ public class CommandSeeAppUser implements ICommand {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		int userID = (int) request.getSession().getAttribute(USER_ID);
+
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
 				.readByUserID(userID);
-	
+
 		request.setAttribute("list", list);
 		request.setAttribute("list_size", list.size());
 		request.getRequestDispatcher("my_applications.jsp").forward(request,
 				response);
+
 		return null;
 	}
 
