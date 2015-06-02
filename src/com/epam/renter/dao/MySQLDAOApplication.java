@@ -16,8 +16,8 @@ import com.epam.renter.entities.TypeOfWork;
 public class MySQLDAOApplication implements IDAOApplication{
 
 	private static String READ_BY_USER_ID_QUERY = "SELECT * FROM applications WHERE idUser=?;";
-	private static String READ_BY_STATUS_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications WHERE STATUS=?;";
-	private static String READ_ALL_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications";
+	//private static String READ_BY_STATUS_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications WHERE STATUS=?;";
+	//private static String READ_ALL_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications";
 	private static String CREATE_QUERY = "INSERT INTO applications (idUser, about, status, typeOfWork, creation, desirable, start, end) VALUES (?,?,?,?,?,?,?,?);";
 
 	

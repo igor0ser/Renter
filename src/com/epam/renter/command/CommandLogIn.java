@@ -6,15 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.User;
+import com.epam.renter.properties.Config;
 
 public class CommandLogIn implements ICommand {
 
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
 	private static final String USER_ID = "user_id";
+	private static final String ERROR = "error";
 
 
 	@Override
@@ -26,21 +27,21 @@ public class CommandLogIn implements ICommand {
 		User user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 
 		if (user == null) {
-			request.setAttribute("error",
+			request.setAttribute(ERROR,
 					"Wrong login");
-			request.getRequestDispatcher("error_login.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.ERROR_LOGIN)).forward(request,
 					response);
 			
 		} else if (!user.getPassword().equals(password)) {
-			request.setAttribute("error",
+			request.setAttribute(ERROR,
 					"Wrong password");
-			request.getRequestDispatcher("error_login.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.ERROR_LOGIN)).forward(request,
 					response);
 		} else {
 			request.setAttribute("user", user);
 			request.getSession().setAttribute(LOGIN, login);
 			request.getSession().setAttribute(USER_ID, user.getId());
-			request.getRequestDispatcher("welcome.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.WELCOME)).forward(request,
 					response);
 		}
 

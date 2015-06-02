@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
+import com.epam.renter.properties.Config;
 
 public class CommandRegistration implements ICommand {
 	private static final String LOGIN = "login";
@@ -22,6 +23,7 @@ public class CommandRegistration implements ICommand {
 	private static final String HOUSE = "house";
 	private static final String APPARTMENT = "appartment";
 	private static final String USER_ID = "user_id";
+	private static final String ERROR = "error";
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -31,17 +33,17 @@ public class CommandRegistration implements ICommand {
 		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
 
 		if (!password.equals(repeatPassword)) {
-			request.setAttribute("error",
+			request.setAttribute(ERROR,
 					"Password doesn't equals to Repeat Password!");
-			request.getRequestDispatcher("error_login.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.ERROR_LOGIN)).forward(request,
 					response);
 			return null;
 		}
 
 		if (DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login) != null) {
-			request.setAttribute("error",
+			request.setAttribute(ERROR,
 					"Sorry, this login is already in use!");
-			request.getRequestDispatcher("error_login.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.ERROR_LOGIN)).forward(request,
 					response);
 			return null;
 		}
@@ -66,12 +68,12 @@ public class CommandRegistration implements ICommand {
 			request.getSession().setAttribute(NAME, name);
 			request.getSession().setAttribute(USER_ID, user.getId());
 			request.setAttribute("user", user);
-			request.getRequestDispatcher("welcome.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.WELCOME)).forward(request,
 					response);
 		} else {
-			request.setAttribute("error",
+			request.setAttribute(ERROR,
 					"Sorry, something goes wrong :( Please try again later.");
-			request.getRequestDispatcher("error_login.jsp").forward(request,
+			request.getRequestDispatcher(Config.getInstance().getProperty(Config.ERROR_LOGIN)).forward(request,
 					response);
 			return null;
 		}

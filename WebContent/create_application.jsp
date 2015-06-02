@@ -10,7 +10,7 @@
 <body>
 
 
-	<%@include file="title-menu.jsp"%>
+	<%@include file="/jsp_user/title-menu.jsp"%>
 
 
 
