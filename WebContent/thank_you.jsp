@@ -21,7 +21,10 @@
 <c:out value="${sessionScope.login}"></c:out>
 !
 </b><br>
-<b>Welcome, to our site!<b>
+<b>We received your application!<b><br>
+<b>We will handle it as soon as we can!<b>
 </div>
+
+
 </div>
 </body>

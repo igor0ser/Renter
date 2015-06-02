@@ -43,21 +43,16 @@ public class CommandCreateApp implements ICommand {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		response.getWriter().println(about);
-		response.getWriter().println(typeOfWork.ordinal());
-		response.getWriter().println(desirableTime);
-		response.getWriter().println(desirable);
-		response.getWriter().println(userID);
-		
 		User user = new User(userID);
 		Application application = new Application(user, about, typeOfWork, desirable);
-		response.getWriter().println(application);
 		
+		boolean flag = DAOFactory.mySQLFactory.mySQLDAOApplication.create(application);
 		
+		if (flag){
+			request.getRequestDispatcher("thank_you.jsp").forward(request,
+					response);
+		}
 		
-		boolean x = DAOFactory.mySQLFactory.mySQLDAOApplication.create(application);
-		response.getWriter().println(x);
 		return null;
 	}
 

@@ -29,7 +29,7 @@ else return true;
 <button  name="application" type="submit">RU</button></br>
 </div>
 
-<form id="login-form" action="controller" method="get" name="command">
+<form id="login-form" action="controller" method="post" name="command">
 <input type="hidden" name="command" value ="login"/>
 <table>
 <tr>
@@ -50,7 +50,7 @@ else return true;
 <div class= "center-container animated fadeInUpBig">
 <div id="hello"><b>Welcome to RENTER!</b></div>
 <b>Registration form:</b>
-<form id="reg-form" onSubmit="return checkPw(this)" action="controller" method="get">
+<form id="reg-form" onSubmit="return checkPw(this)" action="controller" method="post">
 <input type="hidden" name="command" value ="registration"/>
 <table>
 <tr ><td>Login:</td>

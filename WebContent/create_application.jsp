@@ -10,13 +10,13 @@
 <body>
 
 
-<%@include file="title-menu.jsp"%>
+	<%@include file="title-menu.jsp"%>
 
 
 
 	<div class="center-container animated fadeInUpBig">
 		<b>Aplication form:</b>
-		<form id="app-form" action="controller" method="get">
+		<form id="app-form" action="controller" method="post">
 			<input type="hidden" name="command" value="create_app" />
 			<table>
 				<tr>
@@ -50,6 +50,6 @@
 			</table>
 		</form>
 	</div>
-	
-	
+
+
 </body>

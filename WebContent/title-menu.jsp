@@ -16,7 +16,7 @@
 						<td><a href="create_application.jsp"><button>Create
 									Aplication</button></a></td>
 						<td>
-							<form id="my_apps" action="controller" method="get">
+							<form id="my_apps" action="controller" method="post">
 								<input type="hidden" name="command" value="see_app_user" />
 								<button name="application" type="submit" 
 									>My Applications</button>
