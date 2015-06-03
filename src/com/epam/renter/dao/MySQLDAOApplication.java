@@ -15,12 +15,44 @@ import com.epam.renter.entities.TypeOfWork;
 
 public class MySQLDAOApplication implements IDAOApplication{
 
+	private static String READ_BY_ID_QUERY = "SELECT * FROM applications WHERE idApplication=?;";
 	private static String READ_BY_USER_ID_QUERY = "SELECT * FROM applications WHERE idUser=?;";
 	private static String READ_BY_STATUS_QUERY = "SELECT * FROM applications WHERE status=?;";
 	private static String CREATE_QUERY = "INSERT INTO applications (idUser, about, status, typeOfWork, creation, desirable, start, end) VALUES (?,?,?,?,?,?,?,?);";
 
+	@Override
+	public Application findByID(int ID) {
+		Application application = null;
+		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
+			PreparedStatement preparedStatement = conn
+					.prepareStatement(READ_BY_ID_QUERY);
+			preparedStatement.setInt(1, ID);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				application = new Application();
+				application.setId(resultSet.getInt("idApplication"));
+				application.getUser().setId(resultSet.getInt("idUser"));
+				application.setAbout(resultSet.getString("about"));
+				application.setStatus(Status.valueOf(resultSet
+						.getString("status")));
+				application.setTypeOfWork(TypeOfWork.valueOf(resultSet
+						.getString("typeOfWork")));
+				application.setCreation(resultSet
+						.getTimestamp("creation"));
+				application.setDesirable(resultSet
+						.getTimestamp("desirable"));
+				application.setStart(resultSet
+						.getTimestamp("start"));
+				application.setEnd(resultSet
+						.getTimestamp("end"));
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return application;
+	}
 	
-	public List<Application> readByUserID(int userID){
+	public List<Application> findByUserID(int userID){
 		List<Application> list = new ArrayList<>();
 		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = conn
@@ -55,7 +87,7 @@ public class MySQLDAOApplication implements IDAOApplication{
 
 
 	@Override
-	public List<Application> readByStatus(Status status) {
+	public List<Application> findByStatus(Status status) {
 		List<Application> list = new ArrayList<>();
 		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = conn
@@ -119,6 +151,7 @@ public class MySQLDAOApplication implements IDAOApplication{
 			return false;
 		}
 	}
+
 	}
 
 

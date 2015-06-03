@@ -23,7 +23,7 @@ public class Application implements Serializable{
 
 	public Application(int id, User user, String about, Status status,
 			TypeOfWork typeOfWork, Date creation, Date desirable,
-			Date complete, Date start, Date end) {
+			Date start, Date end) {
 		this.id = id;
 		this.user = user;
 		this.about = about;
@@ -31,7 +31,6 @@ public class Application implements Serializable{
 		this.typeOfWork = typeOfWork;
 		this.creation = creation;
 		this.desirable = desirable;
-		this.complete = complete;
 		this.start = start;
 		this.end = end;
 	}
@@ -43,7 +42,6 @@ public class Application implements Serializable{
 	private TypeOfWork typeOfWork;
 	private Date creation;
 	private Date desirable;
-	private Date complete;
 	private Date start;
 	private Date end;
 	public int getId() {
@@ -102,13 +100,6 @@ public class Application implements Serializable{
 		this.desirable = desirable;
 	}
 
-	public Date getComplete() {
-		return complete;
-	}
-
-	public void setComplete(Date complete) {
-		this.complete = complete;
-	}
 
 	public Date getStart() {
 		return start;
@@ -131,8 +122,6 @@ public class Application implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((about == null) ? 0 : about.hashCode());
-		result = prime * result
-				+ ((complete == null) ? 0 : complete.hashCode());
 		result = prime * result
 				+ ((creation == null) ? 0 : creation.hashCode());
 		result = prime * result
@@ -160,11 +149,6 @@ public class Application implements Serializable{
 			if (other.about != null)
 				return false;
 		} else if (!about.equals(other.about))
-			return false;
-		if (complete == null) {
-			if (other.complete != null)
-				return false;
-		} else if (!complete.equals(other.complete))
 			return false;
 		if (creation == null) {
 			if (other.creation != null)
@@ -205,7 +189,7 @@ public class Application implements Serializable{
 		return "Application [id=" + id + ", user=" + user + ", about=" + about
 				+ ", status=" + status + ", typeOfWork=" + typeOfWork
 				+ ", creation=" + creation + ", desirable=" + desirable
-				+ ", complete=" + complete + ", start=" + start + ", end="
+				+ ", start=" + start + ", end="
 				+ end + "]";
 	}
 

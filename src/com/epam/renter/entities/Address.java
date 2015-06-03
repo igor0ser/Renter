@@ -120,8 +120,7 @@ public class Address implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", house=" + house
-				+ ", appartment=" + appartment + ", user=" + user + "]";
+		return street + ", " + house + ", " + appartment;
 	}
 
 }

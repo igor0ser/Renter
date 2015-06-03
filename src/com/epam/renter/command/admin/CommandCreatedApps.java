@@ -25,13 +25,14 @@ public class CommandCreatedApps implements ICommand {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
-				.readByStatus(Status.CREATED);
+				.findByStatus(Status.CREATED);
 		for (Application app : list) {
 			User user = DAOFactory.mySQLFactory.mySQLDAOUser.findByID(app
 					.getUser().getId());
-			app.setUser(user);
 			Address address = DAOFactory.mySQLFactory.mySQLDAOAddress
 					.findByUser(user);
+			user.setAddress(address);
+			app.setUser(user);
 		}
 
 		request.setAttribute(LIST, list);
@@ -39,7 +40,9 @@ public class CommandCreatedApps implements ICommand {
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_CREATED_APPS))
 				.forward(request, response);
-
+		request.getRequestDispatcher(
+				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))
+				.forward(request, response);
 		return null;
 	}
 

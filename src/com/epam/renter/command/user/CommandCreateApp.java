@@ -38,8 +38,7 @@ public class CommandCreateApp implements ICommand {
 		try {
 			desirable = formatter.parse(desirableTime);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+					e.printStackTrace();
 		}
 		User user = new User(userID);
 		Application application = new Application(user, about, typeOfWork,

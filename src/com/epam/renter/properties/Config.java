@@ -15,7 +15,8 @@ public class Config {
     public static final String ERROR_DB = "ERROR_DB";
     public static final String ADMIN_WELCOME = "ADMIN_WELCOME";
     public static final String ADMIN_CREATED_APPS = "ADMIN_CREATED_APPS";
-    
+    public static final String ADMIN_HANDLE_APP = "ADMIN_HANDLE_APP";
+    public static final String ADMIN_FREE_WORKERS = "ADMIN_FREE_WORKERS";
 
     public static Config getInstance() {
         if (instance == null) {

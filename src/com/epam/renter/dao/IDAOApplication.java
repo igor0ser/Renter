@@ -7,9 +7,11 @@ import com.epam.renter.entities.Status;
 
 public interface IDAOApplication {
 
-	public List<Application> readByUserID(int userID);
+	public Application findByID(int ID);
 	
-	public List<Application> readByStatus(Status status);
+	public List<Application> findByUserID(int userID);
+	
+	public List<Application> findByStatus(Status status);
 	
 	public boolean create(Application application);
 	

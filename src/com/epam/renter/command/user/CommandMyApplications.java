@@ -24,7 +24,7 @@ public class CommandMyApplications implements ICommand {
 		int userID = (int) request.getSession().getAttribute(USER_ID);
 
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
-				.readByUserID(userID);
+				.findByUserID(userID);
 
 		request.setAttribute(LIST, list);
 		request.setAttribute(LIST_SIZE, list.size());
