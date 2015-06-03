@@ -17,8 +17,9 @@ public class Message {
 		}
 		return instance;
 	}
-	
-	private Message(){}
+
+	private Message() {
+	}
 
 	public String getProperty(String key) {
 		return (String) resource.getObject(key);

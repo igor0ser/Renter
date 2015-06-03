@@ -1,0 +1,83 @@
+body {
+	background-image: url("http://img2.goodfon.su/original/1920x1200/7/2e/fabric-white-lines-black.jpg"); bgproperties ="fixed";
+	font: 1em 'PT Sans', Tahoma, Arial;
+	margin: 0px;
+}
+
+@font-face {
+	font-family: Tetra;
+	src: url(fonts/tetra.ttf);
+}
+
+.title-container {
+	background: #D3D3D3;
+	height: 95px;
+	width: 100%;
+	position: absolute;
+	border-bottom: 5px solid #F5F5F5;
+	margin-top: -110px;
+}
+
+#title-string {
+	font-family: Tetra;
+	font-size: 500%;
+	margin-left: 10px;
+	width: 200px;
+}
+
+#language {
+	margin: auto;
+	margin-right: 5px;
+	position: relative;
+	margin-top: -85px;
+	float: right;
+}
+
+#language button {
+	width: 40px;
+	display: inline;
+	font-family: Tetra;
+	height: 40px;
+}
+
+.center-container {
+	padding: 10px;
+	background: #D3D3D3;
+	border: 5px solid #F5F5F5;
+	width: 400px;
+	border-radius: 10px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	line-height: 50px;
+	margin-top: 110px;
+}
+
+#message-container{
+	text-align: center;
+	position: relative;
+	padding: 20px;
+}
+
+#menu {
+	position: relative;
+	text-align: center;
+	min-width: 650px;
+	margin-top: -30px;
+}
+
+#menu button {
+	width: 200px;
+	display: inline;
+	text-decoration: underline;
+}
+table {
+	margin: auto;
+}
+
+button {
+	width: 100%;
+	background: GhostWhite;
+	font-size: 110%;
+	border-radius: 7px;
+}

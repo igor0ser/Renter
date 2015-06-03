@@ -12,6 +12,8 @@ public class Config {
     public static final String MY_APPS = "MY_APPS";
     public static final String THANK_YOU = "THANK_YOU";
     public static final String ERROR_DB = "ERROR_DB";
+    public static final String ADMIN_WELCOME = "ADMIN_WELCOME";
+    
     
 
     public static Config getInstance() {
