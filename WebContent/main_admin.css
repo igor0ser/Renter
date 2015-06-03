@@ -1,5 +1,7 @@
 body {
-	background-image: url("http://img2.goodfon.su/original/1920x1200/7/2e/fabric-white-lines-black.jpg"); bgproperties ="fixed";
+	background-image:
+		url("http://img2.goodfon.su/original/1920x1200/7/2e/fabric-white-lines-black.jpg");
+	bgproperties ="fixed";
 	font: 1em 'PT Sans', Tahoma, Arial;
 	margin: 0px;
 }
@@ -53,7 +55,7 @@ body {
 	margin-top: 110px;
 }
 
-#message-container{
+#message-container {
 	text-align: center;
 	position: relative;
 	padding: 20px;
@@ -71,6 +73,7 @@ body {
 	display: inline;
 	text-decoration: underline;
 }
+
 table {
 	margin: auto;
 }
@@ -80,4 +83,53 @@ button {
 	background: GhostWhite;
 	font-size: 110%;
 	border-radius: 7px;
+}
+
+.appplication-container {
+	padding: 10px;
+	background: #D3D3D3;
+	border: 5px solid #F5F5F5;
+	width: 1000px;
+	border-radius: 10px;
+	height: 100%;
+	margin: auto;
+	position: relative;
+	line-height: 50px;
+	margin-top: 110px;
+}
+
+.app-table {
+	border-spacing: 0px;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+.about {
+	width: 400px;
+}
+
+.app-table td {
+	padding: 5px;
+	line-height: 30px;
+}
+
+.app-table th {
+	width: 100px;
+	padding: 5px;
+}
+
+#app-form input {
+	width: 80%;
+}
+
+#app-form  select {
+	width: 82%;
+}
+
+#reg-form input {
+	width: 88%;
+}
+
+.time {
+	text-align: center;
 }

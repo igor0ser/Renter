@@ -7,13 +7,14 @@ public class Config {
 	private static Config instance;
 	private ResourceBundle resource;
 	private static final String BUNDLE_NAME = "com.epam.renter.properties.config";
+	public static final String INDEX = "INDEX";
 	public static final String WELCOME = "WELCOME";
     public static final String ERROR_LOGIN = "ERROR_LOGIN";
     public static final String MY_APPS = "MY_APPS";
     public static final String THANK_YOU = "THANK_YOU";
     public static final String ERROR_DB = "ERROR_DB";
     public static final String ADMIN_WELCOME = "ADMIN_WELCOME";
-    
+    public static final String ADMIN_CREATED_APPS = "ADMIN_CREATED_APPS";
     
 
     public static Config getInstance() {

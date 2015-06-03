@@ -16,8 +16,7 @@ import com.epam.renter.entities.TypeOfWork;
 public class MySQLDAOApplication implements IDAOApplication{
 
 	private static String READ_BY_USER_ID_QUERY = "SELECT * FROM applications WHERE idUser=?;";
-	//private static String READ_BY_STATUS_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications WHERE STATUS=?;";
-	//private static String READ_ALL_QUERY = "SELECT idApplication, idUser, about, status, typeOfWork, creationDate, desirableDate, completeDate, idWorker FROM applications";
+	private static String READ_BY_STATUS_QUERY = "SELECT * FROM applications WHERE status=?;";
 	private static String CREATE_QUERY = "INSERT INTO applications (idUser, about, status, typeOfWork, creation, desirable, start, end) VALUES (?,?,?,?,?,?,?,?);";
 
 	
@@ -57,8 +56,35 @@ public class MySQLDAOApplication implements IDAOApplication{
 
 	@Override
 	public List<Application> readByStatus(Status status) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Application> list = new ArrayList<>();
+		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
+			PreparedStatement preparedStatement = conn
+					.prepareStatement(READ_BY_STATUS_QUERY);
+			preparedStatement.setString(1, status.toString());
+				ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Application application = new Application();
+				application.setId(resultSet.getInt("idApplication"));
+				application.getUser().setId(resultSet.getInt("idUser"));
+				application.setAbout(resultSet.getString("about"));
+				application.setStatus(Status.valueOf(resultSet
+						.getString("status")));
+				application.setTypeOfWork(TypeOfWork.valueOf(resultSet
+						.getString("typeOfWork")));
+				application.setCreation(resultSet
+						.getTimestamp("creation"));
+				application.setDesirable(resultSet
+						.getTimestamp("desirable"));
+				application.setStart(resultSet
+						.getTimestamp("start"));
+				application.setEnd(resultSet
+						.getTimestamp("end"));
+				list.add(application);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 

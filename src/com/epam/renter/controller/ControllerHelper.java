@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.epam.renter.command.*;
+import com.epam.renter.command.admin.CommandCreatedApps;
+import com.epam.renter.command.user.*;
 
 public class ControllerHelper {
 
@@ -19,6 +20,7 @@ public class ControllerHelper {
 		commands.put("registration", new CommandRegistration());
 		commands.put("see_app_user", new CommandMyApplications());
 		commands.put("create_app", new CommandCreateApp());
+		commands.put("created_apps", new CommandCreatedApps());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {

@@ -14,12 +14,12 @@ public class MySQLDAOAddress implements IDAOAddress {
 	private static String CREATE_QUERY = "INSERT INTO addresses (street, house, appartment, idUser) VALUES (?,?,?,?);";
 
 	@Override
-	public Address findByID(int idUser) {
+	public Address findByUser(User user) {
 		Address address = null;
 		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = conn
 					.prepareStatement(READ_BY_ID_QUERY);
-			preparedStatement.setInt(1, idUser);
+			preparedStatement.setInt(1, user.getId());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				address = new Address();
@@ -27,7 +27,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 				address.setStreet(resultSet.getString("street"));
 				address.setHouse(resultSet.getString("house"));
 				address.setAppartment(resultSet.getString("appartment"));
-				address.setUser(new User(resultSet.getInt("idUser")));
+				address.setUser(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
