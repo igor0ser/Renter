@@ -48,8 +48,8 @@ public class CommandHandleApp implements ICommand {
 		String defaultStart = formatter.format(app.getDesirable());
 		String defaultEnd = formatter.format(defaultEndTime);
 
-		request.setAttribute(DEFAULT_START, defaultStart);
-		request.setAttribute(DEFAULT_END, defaultEnd);
+		request.getSession().setAttribute(DEFAULT_START, defaultStart);
+		request.getSession().setAttribute(DEFAULT_END, defaultEnd);
 		request.getSession().setAttribute(APP, app);
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))

@@ -47,12 +47,12 @@
 								timeStyle="short" value="${item.creation}" /></td>
 						<td class="time"><fmt:formatDate type="both"
 								timeStyle="short" value="${item.desirable}" /></td>
-							<td class="time"><fmt:formatDate type="both"
+						<td class="time"><fmt:formatDate type="both"
 								timeStyle="short" value="${item.start}" /></td>
 						<td class="time"><fmt:formatDate type="both"
 								timeStyle="short" value="${item.end}" /></td>
-							<td>${item.typeOfWork}</td>		
-								
+						<td>${item.typeOfWork}</td>
+
 						<td><form action="controller" method="post">
 								<input type="hidden" name="command" value="handle_app" /> <input
 									type="hidden" name="app_id" value=${item.id } />

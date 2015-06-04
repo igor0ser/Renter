@@ -52,8 +52,8 @@ public class CommandFreeWorkers implements ICommand {
 		request.setAttribute(LIST, freeWorkers);
 		request.setAttribute(LIST_SIZE, freeWorkers.size());
 
-		request.setAttribute(DEFAULT_START, startTime);
-		request.setAttribute(DEFAULT_END, endTime);
+		request.getSession().setAttribute(DEFAULT_START, startTime);
+		request.getSession().setAttribute(DEFAULT_END, endTime);
 		request.setAttribute(IS_CHECKED, showAll);
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))

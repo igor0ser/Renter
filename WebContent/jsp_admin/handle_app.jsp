@@ -82,7 +82,7 @@
 							<tr>
 								<td>${item}</td>
 								<td>${item.typeOfWork}</td>
-								<td><input type="checkbox" name="${item.id}"></td>
+								<td><input type="checkbox" name="${item.id}" value="true"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
