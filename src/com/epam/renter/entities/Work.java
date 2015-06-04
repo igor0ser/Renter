@@ -9,6 +9,12 @@ public class Work implements Serializable{
 	public Work() {
 	}
 	
+	public Work(int id, Application application, Worker worker) {
+		this.id = id;
+		this.application = application;
+		this.worker = worker;
+	}
+
 	private int id;
 	private Application application;
 	private Worker worker;
@@ -64,10 +70,5 @@ public class Work implements Serializable{
 		return true;
 	}
 	
-	public Work(int id, Application application, Worker worker) {
-		this.id = id;
-		this.application = application;
-		this.worker = worker;
-	}
 		
 }

@@ -40,9 +40,6 @@ public class CommandCreatedApps implements ICommand {
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_CREATED_APPS))
 				.forward(request, response);
-		request.getRequestDispatcher(
-				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))
-				.forward(request, response);
 		return null;
 	}
 

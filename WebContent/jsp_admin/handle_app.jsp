@@ -46,18 +46,46 @@
 						<td class="time"><fmt:formatDate type="both"
 								timeStyle="short" value="${app.desirable}" /></td>
 						<td class="calendar" class="reg-input"><input name="start"
-							type="datetime-local" required>
+							type="datetime-local"
+							value=<c:out value="${default_start}"></c:out> required>
 						<td class="calendar" class="reg-input"><input name="end"
-							type="datetime-local" required></td>
+							type="datetime-local" required value="${default_end}"></td>
+
 
 					</tr>
 				</tbody>
 			</table>
+
+			<input type="checkbox" name="show-all" value="true"
+				<c:if test="${is_checked}">checked</c:if>> Show all
+			specialties.
+
 			<button type="submit">Free workers</button>
 		</form>
 
-		<c:out value="${start}"></c:out>
-		<c:out value="${end}"></c:out>
 
-	</div>
+		<c:if test="${list_size > 0}">
+			<div id="free_workers">
+				<table class="app-table" rules="all">
+					<caption>
+						<b> Free workers </b>
+					</caption>
+					<tbody>
+						<tr>
+							<th>Name</th>
+							<th>Specialty</th>
+							<th>Assign</th>
+						</tr>
+						<c:forEach var="item" items="${list}">
+
+							<tr>
+								<td>${item}</td>
+								<td>${item.typeOfWork}</td>
+								<td><input type="checkbox"></td>
+							</tr>
+						</c:forEach>
+						</div>
+						</c:if>
+
+						</div>
 </body>

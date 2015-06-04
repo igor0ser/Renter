@@ -40,6 +40,7 @@ public class CommandCreateApp implements ICommand {
 		} catch (ParseException e) {
 					e.printStackTrace();
 		}
+		
 		User user = new User(userID);
 		Application application = new Application(user, about, typeOfWork,
 				desirable);

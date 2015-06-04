@@ -2,14 +2,13 @@ package com.epam.renter.dao;
 
 import java.util.List;
 
+import com.epam.renter.entities.TypeOfWork;
 import com.epam.renter.entities.Worker;
 
 public interface IDAOWorker {
-	public Worker read(int idWorker);
-	
-	public Worker read(String login);
+
+	public List<Worker> findByTypeOfWork(TypeOfWork typeOfWork);
 	
 	public List<Worker> readAll();
-
-	public boolean create(Worker worker);
+	
 }

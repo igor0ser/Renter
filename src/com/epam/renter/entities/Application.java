@@ -11,6 +11,11 @@ public class Application implements Serializable{
 		this.user = new User();
 	}
 
+	public Application(int id) {
+		this.user = new User();
+		this.id = id;
+	}
+	
 	public Application(User user, String about, 
 			TypeOfWork typeOfWork, Date desirable) {
 		this.user = user;

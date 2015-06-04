@@ -7,115 +7,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.epam.renter.datasource.ConnectionPool;
-import com.epam.renter.entities.AbstractUser;
+import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.TypeOfWork;
 import com.epam.renter.entities.Worker;
 
-public class MySQLDAOWorker implements IDAOAbstractUser {
-
+public class MySQLDAOWorker implements IDAOWorker {
+	private static String FIND_BY_ID_QUERY = "SELECT *  FROM workers WHERE typeOfWork=?;";
 	private static String READ_ALL_QUERY = "SELECT *  FROM workers;";
-	private static String READ_BY_ID_QUERY = "SELECT *  FROM workers WHERE idWorker=?;";
-	private static String READ_BY_LOGIN_QUERY = "SELECT * FROM workers WHERE login=?;";
-	private static String CREATE_QUERY = "INSERT INTO workers (login, password, lastName, firstName, email, phoneNumber, typeOfWork) VALUES (?,?,?,?,?,?,?);";
 
-	
 	@Override
-	public Worker findByID(int idWorker) {
-		Worker worker = null;
-		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
-			PreparedStatement preparedStatement = dbConnection
-					.prepareStatement(READ_BY_ID_QUERY);
-			preparedStatement.setInt(1, idWorker);
+	public List<Worker> findByTypeOfWork(TypeOfWork typeOfWork) {
+		List<Worker> list = new ArrayList<>();
+		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
+			PreparedStatement preparedStatement = conn
+					.prepareStatement(FIND_BY_ID_QUERY);
+			preparedStatement.setString(1, typeOfWork.toString());
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				worker = new Worker();
+			while (resultSet.next()) {
+				Worker worker = new Worker();
 				worker.setId(resultSet.getInt("idWorker"));
-				worker.setLogin(resultSet.getString("login"));
-				worker.setPassword(resultSet.getString("password"));
-				worker.setLastName(resultSet.getString("lastName"));
-				worker.setEmail(resultSet.getString("email"));
-				worker.setPhoneNumber(resultSet.getString("phoneNumber"));
+				worker.setName(resultSet.getString("name"));
+				worker.setSurname(resultSet.getString("surname"));
 				worker.setTypeOfWork(TypeOfWork.valueOf(resultSet
 						.getString("typeOfWork")));
+				list.add(worker);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return worker;
+		return list;
 	}
 
 	@Override
-	public Worker findByLogin(String login) {
-		Worker worker = null;
-		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
-			PreparedStatement preparedStatement = dbConnection
-					.prepareStatement(READ_BY_LOGIN_QUERY);
-			preparedStatement.setString(1, login);
+	public List<Worker> readAll() {
+		List<Worker> list = new ArrayList<>();
+		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
+			PreparedStatement preparedStatement = conn
+					.prepareStatement(READ_ALL_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				worker = new Worker();
+			while (resultSet.next()) {
+				Worker worker = new Worker();
 				worker.setId(resultSet.getInt("idWorker"));
-				worker.setLogin(resultSet.getString("login"));
-				worker.setPassword(resultSet.getString("password"));
-				worker.setLastName(resultSet.getString("lastName"));
-				worker.setEmail(resultSet.getString("email"));
-				worker.setPhoneNumber(resultSet.getString("phoneNumber"));
+				worker.setName(resultSet.getString("name"));
+				worker.setSurname(resultSet.getString("surname"));
 				worker.setTypeOfWork(TypeOfWork.valueOf(resultSet
 						.getString("typeOfWork")));
+				list.add(worker);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return worker;
+		return list;
 	}
-
-	@Override
-	public List<AbstractUser> readAll() {
-		List<AbstractUser> list = new ArrayList<AbstractUser>();
-		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
-		PreparedStatement preparedStatement = dbConnection
-				.prepareStatement(READ_ALL_QUERY);
-		ResultSet resultSet = preparedStatement.executeQuery();
-		while (resultSet.next()) {
-			Worker worker = new Worker();
-			worker.setId(resultSet.getInt("idWorker"));
-			worker.setLogin(resultSet.getString("login"));
-			worker.setPassword(resultSet.getString("password"));
-			worker.setLastName(resultSet.getString("lastName"));
-			worker.setFirstName(resultSet.getString("firstName"));
-			worker.setEmail(resultSet.getString("email"));
-			worker.setPhoneNumber(resultSet.getString("phoneNumber"));
-			worker.setTypeOfWork(TypeOfWork.valueOf(resultSet
-						.getString("typeOfWork")));
-			list.add(worker);
-		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	return list;
-	}
-
-	@Override
-	public boolean create(AbstractUser abstractUser) {
-		Worker worker = (Worker) abstractUser;
-		try (Connection dbConnection = ConnectionPool.getInstance().getConnection();) {
-			PreparedStatement preparedStatement = dbConnection
-					.prepareStatement(CREATE_QUERY);
-			preparedStatement.setString(1, worker.getLogin());
-			preparedStatement.setString(2, worker.getPassword());
-			preparedStatement.setString(3, worker.getLastName());
-			preparedStatement.setString(4, worker.getFirstName());
-			preparedStatement.setString(5, worker.getEmail());
-			preparedStatement.setString(6, worker.getPhoneNumber());
-			preparedStatement.setString(7, worker.getTypeOfWork().toString());
-			preparedStatement.execute();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 
 }

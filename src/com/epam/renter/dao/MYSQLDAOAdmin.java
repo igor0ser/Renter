@@ -9,14 +9,14 @@ import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.Admin;
 
 public class MYSQLDAOAdmin implements IDAOAdmin {
-	private static String READ_BY_ID_QUERY = "SELECT *  FROM admins WHERE idUser=?;";
+	private static String FIND_BY_ID_QUERY = "SELECT *  FROM admins WHERE idUser=?;";
 	@Override
 	public Admin findByUserID(int idUser) {
 		Admin admin= null;
 		try (Connection conn = ConnectionSource.getInstance()
 				.getConnection();) {
 			PreparedStatement preparedStatement = conn
-					.prepareStatement(READ_BY_ID_QUERY);
+					.prepareStatement(FIND_BY_ID_QUERY);
 			preparedStatement.setInt(1, idUser);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {

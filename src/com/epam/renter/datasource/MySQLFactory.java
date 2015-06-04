@@ -12,4 +12,8 @@ public class MySQLFactory {
 	
 	public final IDAOApplication mySQLDAOApplication  = new MySQLDAOApplication ();
 	
+	public final IDAOWorker mySQLDAOWorker= new MySQLDAOWorker();
+	
+	public final IDAOWork mySQLDAOWork= new MySQLDAOWork();
+	
 }

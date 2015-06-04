@@ -1,6 +1,9 @@
 package com.epam.renter.command.admin;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +20,15 @@ public class CommandHandleApp implements ICommand {
 
 	private static final String APP_ID = "app_id";
 	private static final String APP = "app";
+	private static final String DEFAULT_START = "default_start";
+	private static final String DEFAULT_END = "default_end";
+	private static final String FORMAT = "yyyy-MM-dd'T'HH:mm";
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
 		String app_id = request.getParameter(APP_ID);
 		int id = Integer.parseInt(app_id);
 		Application app = DAOFactory.mySQLFactory.mySQLDAOApplication
@@ -32,9 +39,18 @@ public class CommandHandleApp implements ICommand {
 				.findByUser(user);
 		user.setAddress(address);
 		app.setUser(user);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(app.getDesirable());
+		cal.add(Calendar.HOUR, 2);
+		Date defaultEndTime = cal.getTime();
+		
+		String defaultStart = formatter.format(app.getDesirable());
+		String defaultEnd = formatter.format(defaultEndTime);
 
-		response.getWriter().println(app);
-		request.setAttribute(APP, app);
+		request.setAttribute(DEFAULT_START, defaultStart);
+		request.setAttribute(DEFAULT_END, defaultEnd);
+		request.getSession().setAttribute(APP, app);
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))
 				.forward(request, response);
