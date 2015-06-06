@@ -11,4 +11,6 @@ public interface IDAOWorker {
 	
 	public List<Worker> readAll();
 	
+	public Worker findByID(int id);
+	
 }

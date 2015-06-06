@@ -15,6 +15,7 @@ import com.epam.renter.entities.Worker;
 public class MySQLDAOWork implements IDAOWork {
 	private static String FIND_BY_WORKER_ID = "SELECT *  FROM works WHERE idWorker=?;";
 	private static String FIND_BY_APPLICATION_ID = "SELECT *  FROM works WHERE idApplication=?;";
+	private static String CREATE_QUERY = "INSERT INTO works (idApplication, idWorker) VALUES (?,?);";
 
 	@Override
 	public List<Work> findByWorker(Worker worker) {
@@ -53,6 +54,23 @@ public class MySQLDAOWork implements IDAOWork {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public boolean create(Work work) {
+		try (Connection dbConnection = ConnectionSource.getInstance()
+				.getConnection();) {
+			PreparedStatement preparedStatement = dbConnection
+					.prepareStatement(CREATE_QUERY);
+			preparedStatement.setInt(1, work.getApplication().getId());
+			preparedStatement.setInt(2, work.getWorker().getId());
+			
+			preparedStatement.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

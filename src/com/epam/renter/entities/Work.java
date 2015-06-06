@@ -9,6 +9,11 @@ public class Work implements Serializable{
 	public Work() {
 	}
 	
+	public Work(Application application, Worker worker) {
+		this.application = application;
+		this.worker = worker;
+	}
+	
 	public Work(int id, Application application, Worker worker) {
 		this.id = id;
 		this.application = application;

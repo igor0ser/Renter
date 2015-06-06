@@ -51,5 +51,16 @@ public class ServiceWork {
 		}
 		return freeWorkers;
 	}
+	
+	public static List<Worker> getWorkersByApp(Application app){
+		List<Work> workList = DAOFactory.mySQLFactory.mySQLDAOWork.findByApplication(app);
+		List<Worker> workerList= new ArrayList<>();
+		for (Work work : workList){
+			int idWorker = work.getWorker().getId();
+			Worker worker = DAOFactory.mySQLFactory.mySQLDAOWorker.findByID(idWorker);
+			workerList.add(worker);
+		}
+		return null;
+	}
 
 }

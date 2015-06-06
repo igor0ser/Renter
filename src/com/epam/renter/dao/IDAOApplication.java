@@ -15,4 +15,6 @@ public interface IDAOApplication {
 	
 	public boolean create(Application application);
 	
+	public boolean update(Application application);
+	
 }

@@ -3,6 +3,7 @@ package com.epam.renter.command.admin;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.epam.renter.command.user.ICommand;
-import com.epam.renter.entities.TypeOfWork;
+import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Worker;
 import com.epam.renter.properties.Config;
 import com.epam.renter.service.ServiceWork;
@@ -22,11 +23,12 @@ public class CommandFreeWorkers implements ICommand {
 	private static final String START = "start";
 	private static final String END = "end";
 	private static final String IS_CHECKED = "is_checked";
-	private static final String LIST = "list";
+	private static final String LIST_WORKERS = "list_workers";
 	private static final String LIST_SIZE = "list_size";
 	private static final String SHOW_ALL = "show-all";
 	private static final String DEFAULT_START = "default_start";
 	private static final String DEFAULT_END = "default_end";
+	private static final String APP = "app";
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -46,10 +48,15 @@ public class CommandFreeWorkers implements ICommand {
 			e.printStackTrace();
 			return null;
 		}
+		
+		Application app = (Application) request.getSession().getAttribute(APP);
+
 		List<Worker> freeWorkers = (showAll) ? ServiceWork.getFreeWorkers(
-				start, end) : ServiceWork.getFreeWorkers(TypeOfWork.ELECTRIC,
+				start, end) : ServiceWork.getFreeWorkers(app.getTypeOfWork(),
 				start, end);
-		request.setAttribute(LIST, freeWorkers);
+				
+				response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
+		request.getSession().setAttribute(LIST_WORKERS, freeWorkers);
 		request.setAttribute(LIST_SIZE, freeWorkers.size());
 
 		request.getSession().setAttribute(DEFAULT_START, startTime);

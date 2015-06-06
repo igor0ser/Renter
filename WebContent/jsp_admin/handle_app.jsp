@@ -78,7 +78,7 @@
 							<th>Specialty</th>
 							<th>Assign</th>
 						</tr>
-						<c:forEach var="item" items="${list}">
+						<c:forEach var="item" items="${list_workers}">
 							<tr>
 								<td>${item}</td>
 								<td>${item.typeOfWork}</td>

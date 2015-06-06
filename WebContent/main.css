@@ -92,12 +92,14 @@ button {
 	background: GhostWhite;
 	font-size: 110%;
 	border-radius: 7px;
+	cursor: pointer;
 }
 
 #menu button {
 	width: 200px;
 	display: inline;
 	text-decoration: underline;
+	cursor: pointer
 }
 
 #menu {
@@ -112,6 +114,7 @@ button {
 	display: inline;
 	font-family: Tetra;
 	height: 40px;
+	cursor: pointer;
 }
 
 #language {

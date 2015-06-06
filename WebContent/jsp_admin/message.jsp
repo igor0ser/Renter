@@ -18,9 +18,8 @@
 
 	<div class="center-container">
 		<div id="message-container">
-			<b>Hello, <c:out value="${sessionScope.login}"></c:out>!
-			</b><br> <b>Have a nice day!<b>
-		</div>
+			<b><c:out value="${message}"></c:out></b>
+			</div>
 	</div>
 
 </body>

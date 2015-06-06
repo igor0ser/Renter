@@ -19,6 +19,7 @@ public class CommandLogIn implements ICommand {
 	private static final String PASSWORD = "password";
 	private static final String USER_ID = "user_id";
 	private static final String ERROR = "error";
+	private static final String ADMIN_MESSAGE = "message";
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -29,13 +30,15 @@ public class CommandLogIn implements ICommand {
 		User user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 
 		if (user == null) {
-			request.setAttribute(ERROR, Message.getInstance().getProperty(Message.WRONG_LOGIN));
+			request.setAttribute(ERROR,
+					Message.getInstance().getProperty(Message.WRONG_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);
 
 		} else if (!user.getPassword().equals(password)) {
-			request.setAttribute(ERROR, Message.getInstance().getProperty(Message.WRONG_PASSWORD));
+			request.setAttribute(ERROR,
+					Message.getInstance().getProperty(Message.WRONG_PASSWORD));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);
@@ -44,8 +47,11 @@ public class CommandLogIn implements ICommand {
 					.findByUserID(user.getId());
 			if (admin != null) {
 				request.getSession().setAttribute(LOGIN, login);
+				request.getSession().setAttribute(LOGIN, login);
+				request.setAttribute(ADMIN_MESSAGE, Message.getInstance()
+						.getProperty(Message.ADMIN_WELCOME));
 				request.getRequestDispatcher(
-						Config.getInstance().getProperty(Config.ADMIN_WELCOME))
+						Config.getInstance().getProperty(Config.ADMIN_MESSAGE))
 						.forward(request, response);
 			} else {
 				request.setAttribute(USER, user);

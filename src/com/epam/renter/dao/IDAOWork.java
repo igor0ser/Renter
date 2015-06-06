@@ -12,4 +12,5 @@ public interface IDAOWork {
 	
 	public List<Work> findByApplication(Application application);
 	
+	public boolean create(Work work);
 }

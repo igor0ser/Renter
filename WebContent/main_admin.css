@@ -83,6 +83,7 @@ button {
 	background: GhostWhite;
 	font-size: 110%;
 	border-radius: 7px;
+	cursor: pointer;
 }
 
 .appplication-container {
