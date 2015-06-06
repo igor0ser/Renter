@@ -14,6 +14,8 @@ public class Message {
 	public static final String ADMIN_WELCOME = "ADMIN_WELCOME";
 	public static final String ADMIN_ERROR = "ADMIN_ERROR";
 	public static final String ADMIN_APP_IS_ASSIGNED = "ADMIN_APP_IS_ASSIGNED";
+	public static final String ADMIN_APP_IS_COMPLETED = "ADMIN_APP_IS_COMPLETED";
+	public static final String AN_APPLICATION = "AN_APPLICATION";
 	
 	public static Message getInstance() {
 		if (instance == null) {

@@ -23,7 +23,7 @@
 			</caption>
 			<tbody>
 				<tr>
-					<th>Login</th>
+					<th>User Login</th>
 					<th>Phone Number</th>
 					<th>Address</th>
 					<th>Type of work</th>

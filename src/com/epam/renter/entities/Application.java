@@ -2,22 +2,24 @@ package com.epam.renter.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Application implements Serializable{
+public class Application implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public Application() {
 		this.user = new User();
+
 	}
 
 	public Application(int id) {
 		this.user = new User();
 		this.id = id;
 	}
-	
-	public Application(User user, String about, 
-			TypeOfWork typeOfWork, Date desirable) {
+
+	public Application(User user, String about, TypeOfWork typeOfWork,
+			Date desirable) {
 		this.user = user;
 		this.about = about;
 		this.status = Status.CREATED;
@@ -27,8 +29,8 @@ public class Application implements Serializable{
 	}
 
 	public Application(int id, User user, String about, Status status,
-			TypeOfWork typeOfWork, Date creation, Date desirable,
-			Date start, Date end) {
+			TypeOfWork typeOfWork, Date creation, Date desirable, Date start,
+			Date end) {
 		this.id = id;
 		this.user = user;
 		this.about = about;
@@ -49,6 +51,16 @@ public class Application implements Serializable{
 	private Date desirable;
 	private Date start;
 	private Date end;
+	private List<Worker> workers;
+
+	public List<Worker> getWorkers() {
+		return workers;
+	}
+
+	public void setWorkers(List<Worker> workers) {
+		this.workers = workers;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -104,7 +116,6 @@ public class Application implements Serializable{
 	public void setDesirable(Date desirable) {
 		this.desirable = desirable;
 	}
-
 
 	public Date getStart() {
 		return start;
@@ -191,13 +202,23 @@ public class Application implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Application [id=" + id + ", user=" + user + ", about=" + about
-				+ ", status=" + status + ", typeOfWork=" + typeOfWork
-				+ ", creation=" + creation + ", desirable=" + desirable
-				+ ", start=" + start + ", end="
-				+ end + "]";
-	}
+		String td = "</td><td>";
+		StringBuilder sb = new StringBuilder();
+		sb.append("<td>").append(user.getLogin()).append(td)
+				.append(user.getPhoneNumber()).append(td)
+				.append(user.getAddress()).append(td)
+				.append(typeOfWork.toString()).append(td).append(about)
+				.append(td).append(creation).append(td).append(desirable).append(td).append(start).append(td).append(end).append(td);
+		if (workers != null) {
+			for (Worker worker : workers) {
+				sb.append(worker).append(", ");
+			}
+			sb.deleteCharAt(sb.length() - 1);
+			sb.deleteCharAt(sb.length() - 1);
+		}
+		sb.append("</td>");
+		
 
-	
-	
+		return sb.toString();
+	}
 }

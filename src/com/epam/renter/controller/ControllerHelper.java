@@ -5,9 +5,11 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import com.epam.renter.command.admin.CommandAddWorkers;
+import com.epam.renter.command.admin.CommandAssignedApps;
 import com.epam.renter.command.admin.CommandCreatedApps;
 import com.epam.renter.command.admin.CommandFreeWorkers;
 import com.epam.renter.command.admin.CommandHandleApp;
+import com.epam.renter.command.admin.CommandSetAppComplete;
 import com.epam.renter.command.user.CommandCreateApp;
 import com.epam.renter.command.user.CommandLogIn;
 import com.epam.renter.command.user.CommandLogOut;
@@ -32,7 +34,8 @@ public class ControllerHelper {
 		commands.put("handle_app", new CommandHandleApp());
 		commands.put("free_workers", new CommandFreeWorkers());
 		commands.put("add_workers", new CommandAddWorkers());
-				
+		commands.put("assigned_apps", new CommandAssignedApps());	
+		commands.put("set_app_complete", new CommandSetAppComplete());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {

@@ -145,16 +145,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 				.getConnection();) {
 			PreparedStatement preparedStatement = dbConnection
 					.prepareStatement(UPDATE_QUERY);
-			
-			
-			System.out.println(new Timestamp(application
-					.getStart().getTime()));
-			System.out.println(new Timestamp(application
-					.getEnd().getTime()));
-			System.out.println(application.getStatus().toString());
-			System.out.println(application.getId());
-			
-
+	
 			preparedStatement.setTimestamp(1, new Timestamp(application
 					.getStart().getTime()));
 			preparedStatement.setTimestamp(2, new Timestamp(application
@@ -169,5 +160,4 @@ public class MySQLDAOApplication implements IDAOApplication {
 			return false;
 		}
 	}
-
 }

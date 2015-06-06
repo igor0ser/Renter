@@ -66,7 +66,7 @@ public class MySQLDAOWorker implements IDAOWorker {
 		Worker worker = null;
 		try (Connection conn = ConnectionSource.getInstance().getConnection();) {
 			PreparedStatement preparedStatement = conn
-					.prepareStatement(FIND_BY_ID_TYPE_OF_WORK);
+					.prepareStatement(FIND_BY_ID_QUERY);
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
@@ -76,12 +76,12 @@ public class MySQLDAOWorker implements IDAOWorker {
 				worker.setSurname(resultSet.getString("surname"));
 				worker.setTypeOfWork(TypeOfWork.valueOf(resultSet
 						.getString("typeOfWork")));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return worker;
 	}
 
