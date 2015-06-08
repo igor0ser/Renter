@@ -32,7 +32,7 @@ public class CommandLogIn implements ICommand {
 
 		if (user == null) {
 			request.setAttribute(ERROR,
-					"Не тот логин");
+					Message.getInstance().getProperty(Message.WRONG_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);

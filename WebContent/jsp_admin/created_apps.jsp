@@ -9,6 +9,7 @@
 <title>Renter - Aplication</title>
 <link rel="stylesheet" href="main_admin.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<fmt:setLocale value="${language}" />
 </head>
 <body>
 
@@ -23,14 +24,14 @@
 			</caption>
 			<tbody>
 				<tr>
-					<th>User Login</th>
-					<th>Phone Number</th>
-					<th>Address</th>
-					<th>Type of work</th>
-					<th>About</th>
-					<th>Creation time</th>
-					<th>Desirable time</th>
-					<th>Handle application</th>
+					<th><fmt:message key="User_login" /></th>
+					<th><fmt:message key="Phone" /></th>
+					<th><fmt:message key="Address" /></th>
+					<th><fmt:message key="Type" /></th>
+					<th><fmt:message key="About" /></th>
+					<th><fmt:message key="Creation" /></th>
+					<th><fmt:message key="Desirable" /></th>
+					<th><fmt:message key="Handle" /></th>
 
 				</tr>
 				<c:forEach var="item" items="${list}">

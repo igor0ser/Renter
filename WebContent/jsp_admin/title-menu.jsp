@@ -15,19 +15,19 @@
 					<td>
 						<form action="controller" method="post">
 							<input type="hidden" name="command" value="created_apps" />
-							<button type="submit">Created Applications</button>
+							<button type="submit"><fmt:message key="Created_apps" /></button>
 						</form>
 					</td>
 					<td>
 						<form action="controller" method="post">
 							<input type="hidden" name="command" value="assigned_apps" />
-							<button type="submit">Assigned Applications</button>
+							<button type="submit"><fmt:message key="Assigned_apps" /></button>
 						</form>
 					</td>
 					<td>
 						<form action="controller" method="post">
 							<input type="hidden" name="command" value="logout" />
-							<button type="submit">Log out</button>
+							<button type="submit"><fmt:message key="Log_out" /></button>
 						</form>
 					</td>
 				</tr>

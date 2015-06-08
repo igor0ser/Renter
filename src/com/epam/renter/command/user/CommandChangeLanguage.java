@@ -21,7 +21,7 @@ public class CommandChangeLanguage implements ICommand {
 		
 		String z = request.getHeader("Referer");
 		
-		request.getRequestDispatcher(z).forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,6 +9,7 @@
 <title>Renter - Aplication</title>
 <link rel="stylesheet" href="main_admin.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<fmt:setLocale value="${language}" />
 </head>
 <body>
 

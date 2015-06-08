@@ -71,37 +71,37 @@
 			<input type="hidden" name="command" value="registration" />
 			<table>
 				<tr>
-					<td><fmt:message key="Login" /></td>
+					<td><fmt:message key="Login" />:</td>
 					<td class="reg-input"><input type="text" name="login" required>
 						<span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Password" /></td>
+					<td><fmt:message key="Password" />:</td>
 					<td class="reg-input"><input type="password" name="password"
 						required> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Repeat_password" /></td>
+					<td><fmt:message key="Repeat_password" />:</td>
 					<td class="reg-input"><input type="password"
 						name="repeat_password" required> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Email" /></td>
+					<td><fmt:message key="Email" />:</td>
 					<td class="reg-input"><input type="email" name="email"
 						required> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Name" /></td>
+					<td><fmt:message key="Name" />:</td>
 					<td class="reg-input"><input type="text" name="name" required>
 						<span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Surname" /></td>
+					<td><fmt:message key="Surname" />:</td>
 					<td class="reg-input"><input type="text" name="surname"
 						required> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Phone" /></td>
+					<td><fmt:message key="Phone" />:</td>
 					<td class="reg-input"><input type="tel" name="phone_number"
 						required> <span class="required"></span></td>
 				</tr>
@@ -109,17 +109,17 @@
 					<td><b><fmt:message key="Address" />:</b></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Street" /></td>
+					<td><fmt:message key="Street" />:</td>
 					<td class="reg-input"><input type="text" name="street"
 						required> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="House" /></td>
+					<td><fmt:message key="House" />:</td>
 					<td class="reg-input"><input type="text" name="house" required>
 						<span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Apartment" /></td>
+					<td><fmt:message key="Apartment" />:</td>
 					<td class="reg-input"><input type="text" name="appartment"
 						required> <span class="required"></span></td>
 				</tr>

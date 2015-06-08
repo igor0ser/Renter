@@ -18,9 +18,9 @@
 
 <div class= "center-container">
 <div id="message-container">
-<b><span>Some errors happened :(</span>
-Please try again.</b>
-<button  onClick="history.back()">Back to Create Application</button>
+<b><span><fmt:message key="Some_errors" /></span>
+<fmt:message key="Try_again" /></b>
+<button  onClick="history.back()"><fmt:message key="Back_to_create" /></button>
 </div>
 </div>
 </body>
