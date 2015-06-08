@@ -6,10 +6,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Renter - Aplication</title>
+<fmt:setLocale value="${language}" />
+<title>Renter - <fmt:message key="Handle" /></title>
 <link rel="stylesheet" href="main_admin.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<fmt:setLocale value="${language}" />
 </head>
 <body>
 
@@ -19,22 +19,23 @@
 
 	<div class="appplication-container">
 		<form action="controller" method="post">
-			<input type="hidden" name="command" value="free_workers"/>
+			<input type="hidden" name="command" value="free_workers" />
 			<table class="app-table" rules="all">
 				<caption>
-					<b> Created applications </b>
+					<b> <fmt:message key="Handle" />
+					</b>
 				</caption>
 				<tbody>
 					<tr>
-						<th>Login</th>
-						<th>Phone Number</th>
-						<th>Address</th>
-						<th>Type of work</th>
-						<th>About</th>
-						<th>Creation time</th>
-						<th>Desirable time</th>
-						<th>Start time</th>
-						<th>End time</th>
+						<th><fmt:message key="User_login" /></th>
+						<th><fmt:message key="Phone" /></th>
+						<th><fmt:message key="Address" /></th>
+						<th><fmt:message key="Type" /></th>
+						<th><fmt:message key="About" /></th>
+						<th><fmt:message key="Creation" /></th>
+						<th><fmt:message key="Desirable" /></th>
+						<th><fmt:message key="Start" /></th>
+						<th><fmt:message key="End" /></th>
 					</tr>
 					<tr>
 						<td>${app.user.login}</td>
@@ -58,26 +59,25 @@
 			</table>
 
 			<input type="checkbox" name="show-all" value="true"
-				<c:if test="${is_checked}">checked</c:if>> Show all
-			specialties.
+				<c:if test="${is_checked}">checked</c:if>> <fmt:message key="Show_all_spec" />
 
-			<button type="submit">Show free workers</button>
+			<button type="submit"><fmt:message key="Show_free_workers" /></button>
 		</form>
-		
-		
-		
+
+
+
 		<c:if test="${list_size > 0}">
 			<form action="controller" method="post">
-			<input type="hidden" name="command" value="add_workers"/>
+				<input type="hidden" name="command" value="add_workers" />
 				<table class="app-table" rules="all">
 					<caption>
-						<b> Free workers </b>
+						<b>  <fmt:message key="Free_workers" /> </b>
 					</caption>
 					<tbody>
 						<tr>
-							<th>Name</th>
-							<th>Specialty</th>
-							<th>Assign</th>
+							<th> <fmt:message key="Name" /></th>
+							<th><fmt:message key="Specialty" /></th>
+							<th><fmt:message key="Assign" /></th>
 						</tr>
 						<c:forEach var="item" items="${list_workers}">
 							<tr>
@@ -88,7 +88,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<button type="submit">Add to this work</button>
+				<button type="submit"><fmt:message key="Add_to_this_work" /></button>
 			</form>
 		</c:if>
 </body>

@@ -19,7 +19,8 @@ public class CommandChangeLanguage implements ICommand {
 		String lang = request.getParameter(LANG);
 		request.getSession().setAttribute(LANGUAGE, lang);
 		
-		String z = request.getHeader("Referer");
+		String z = (String) request.getAttribute("javax.servlet.forward.request_uri");
+		System.out.println(z);
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 		// TODO Auto-generated method stub

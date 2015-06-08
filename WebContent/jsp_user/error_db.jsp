@@ -6,11 +6,12 @@
 <html lang = "en">
 <head>
 <meta charset ="UTF-8">
-<title>Renter - Aplication</title>
+<fmt:setLocale value="${language}" />
+<title>Renter - <fmt:message key="Some_errors" /></title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<fmt:setLocale value="${language}" />
+
 </head>
 <body>
 

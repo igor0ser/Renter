@@ -6,11 +6,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Renter - Aplication</title>
+<fmt:setLocale value="${language}" />
+<title>Renter - <fmt:message key="Thenk_you" /><c:out value="${sessionScope.login}"></c:out>!</title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<fmt:setLocale value="${language}" />
+
 </head>
 <body>
 
@@ -19,12 +20,12 @@
 
 	<div class="center-container  animated fadeInUpBig">
 		<div id="message-container">
-			<b>Thank you, <c:out value="${sessionScope.login}"></c:out>!</b>
-			<b>We received your application!</b></br> <span></span>
+			<b><fmt:message key="Thank_you" /><c:out value="${sessionScope.login}"></c:out>!</b>
+			<b><fmt:message key="We_received" /></b></br> <span></span>
 			<div id="flying_man">
 				<%@include file="flying_man.html"%>
 			</div>
-			<b>We will handle it as soon as we can!<b>
+			<b><fmt:message key="As_soon" /><b>
 		</div>
 	</div>
 

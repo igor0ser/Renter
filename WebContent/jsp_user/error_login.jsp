@@ -6,11 +6,11 @@
 <html lang = "en">
 <head>
 <meta charset ="UTF-8">
-<title>Renter</title>
+<fmt:setLocale value="${language}" />
+<title>Renter - <c:out value="${error}"><fmt:message key="Some_errors" /></c:out></title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<fmt:setLocale value="${language}" />
 </head>
 <body>
 
