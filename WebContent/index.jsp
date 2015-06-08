@@ -1,94 +1,136 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@page contentType="text/html; charset=UTF-8"%>
 <!doctype html>
-<html lang = "en">
+<html lang="en">
 <head>
-<meta charset ="UTF-8">
+<meta charset="UTF-8">
 <title>Welcome to Renter</title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-
+<fmt:setLocale value="${language}" />
 <script>
-function checkPw(form) {
-pw1 = form.password.value;
-pw2 = form.repeat_password.value;
-if (pw1 != pw2) {
-alert ("Password doesn't equal to repeated password!")
-return false;
-}
-else return true;
-}
+	function checkPw(form) {
+		pw1 = form.password.value;
+		pw2 = form.repeat_password.value;
+		if (pw1 != pw2) {
+			alert("Password doesn't equal to repeated password!")
+			return false;
+		} else
+			return true;
+	}
 </script>
 
 </head>
 <body>
-<div class = "title-container">
-<div id = "title-string">RENTER</div>
+	<div class="title-container">
+		<div id="title-string">RENTER</div>
+		<form action="controller" method="post" name="command">
+		<input type="hidden" name="command" value="change_language" />
+			<div id="language">
+				<button name="lang" value="en" type="submit">EN</button>
+				</br>
+				<button name="lang" value="ru" type="submit">RU</button>
+				</br>
+			</div>
+		</form>
+		
+		<form id="login-form" action="controller" method="post" name="command">
+			<input type="hidden" name="command" value="login" />
+			<table>
+				<tr>
+					<td><fmt:message key="Login" /></td>
+					<td class="info"><input type="text" name="login"></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Password" /></td>
+					<td class="info"><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><button type="submit">
+							<fmt:message key="Log_in" />
+						</button></td>
+				</tr>
+			</table>
+		</form>
 
-<div id = "language">
-<button  name="application" type="submit">EN</button></br>
-<button  name="application" type="submit">RU</button></br>
-</div>
 
-<form id="login-form" action="controller" method="post" name="command">
-<input type="hidden" name="command" value ="login"/>
-<table>
-<tr>
-<td>Login:</td>
-<td class="info"><input type="text" name="login"></td>
-</tr>
-<tr><td>Password: </td>
-<td class="info"><input type="password" name="password"></td></tr>
-<tr><td colspan = "2"  align = "center"><button type="submit">Submit</button></td></tr>
-</table>
-</form>
-
-
-</div>
+	</div>
 
 
 
-<div class= "center-container animated fadeInUpBig">
-<div id="hello"><b>Welcome to RENTER!</b></div>
-<b>Registration form:</b>
-<form id="reg-form" onSubmit="return checkPw(this)" action="controller" method="post">
-<input type="hidden" name="command" value ="registration"/>
-<table>
-<tr ><td>Login:</td>
-<td class="reg-input"><input type="text" name="login" required>
-<span class="required"></span></td></tr>
-<tr><td>Password:</td>
-<td class="reg-input"><input type="password" name="password" required>
-<span class="required"></span></td></tr>
-<tr><td>Repeat Password:</td>
-<td class="reg-input"><input type="password" name="repeat_password" required>
-<span class="required"></span></td></tr>
-<tr><td>Email:</td>
-<td class="reg-input"><input type="email" name="email" required>
-<span class="required"></span></td></tr>
-<tr><td>Name:</td>
-<td class="reg-input"><input type="text" name="name" required>
-<span class="required"></span></td></tr>
-<tr><td>Surname:</td>
-<td class="reg-input"><input type="text" name="surname" required>
-<span class="required"></span></td></tr>
-<tr><td>Phone Number:</td>
-<td class="reg-input"><input type="tel" name="phone_number" required>
-<span class="required"></span></td></tr>
-<tr><td><b>Adress:</b></td></tr>
-<tr ><td>Street:</td>
-<td class="reg-input"><input type="text" name="street" required>
-<span class="required"></span></td></tr>
-<tr ><td>House number:</td>
-<td class="reg-input"><input type="text" name="house" required>
-<span class="required"></span></td></tr>
-<tr ><td>Appartment number: </td>
-<td class="reg-input"><input type="text" name="appartment" required>
-<span class="required"></span></td></tr>
-<tr><td colspan = "2"  align = "center">
-<button  name="registatin" type="submit">Submit</button></td></tr>
-</table>
-</form>
-</div>
+	<div class="center-container animated fadeInUpBig">
+		<div id="hello">
+			<b><fmt:message key="Welcome" /></b>
+		</div>
+		<b><fmt:message key="R_form" /></b>
+		<form id="reg-form" onSubmit="return checkPw(this)"
+			action="controller" method="post">
+			<input type="hidden" name="command" value="registration" />
+			<table>
+				<tr>
+					<td><fmt:message key="Login" /></td>
+					<td class="reg-input"><input type="text" name="login" required>
+						<span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Password" /></td>
+					<td class="reg-input"><input type="password" name="password"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Repeat_password" /></td>
+					<td class="reg-input"><input type="password"
+						name="repeat_password" required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Email" /></td>
+					<td class="reg-input"><input type="email" name="email"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Name" /></td>
+					<td class="reg-input"><input type="text" name="name" required>
+						<span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Surname" /></td>
+					<td class="reg-input"><input type="text" name="surname"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Phone" /></td>
+					<td class="reg-input"><input type="tel" name="phone_number"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><b><fmt:message key="Address" />:</b></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Street" /></td>
+					<td class="reg-input"><input type="text" name="street"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="House" /></td>
+					<td class="reg-input"><input type="text" name="house" required>
+						<span class="required"></span></td>
+				</tr>
+				<tr>
+					<td><fmt:message key="Apartment" /></td>
+					<td class="reg-input"><input type="text" name="appartment"
+						required> <span class="required"></span></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button name="registatin" type="submit">
+							<fmt:message key="Sign_up" />
+						</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
-

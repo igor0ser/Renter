@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<fmt:setLocale value="${language}" />
 </head>
 <body>
 
@@ -20,18 +21,18 @@
 	<div class="appplication-container animated fadeInUpBig">
 		<table class="app-table" rules="all">
 			<caption>
-				Applications of user <b> <c:out value="${sessionScope.login}"></c:out>
+				<fmt:message key="Apps_of_user" /> <b> <c:out value="${sessionScope.login}"></c:out>
 				</b>
 			</caption>
 			<tbody>
 				<tr>
-					<th>Status</th>
-					<th>Type of work</th>
-					<th>About</th>
-					<th>Creation time</th>
-					<th>Desirable time</th>
-					<th>Start time</th>
-					<th>End time</th>
+					<th><fmt:message key="Status" /></th>
+					<th><fmt:message key="Type" /> </th>
+					<th><fmt:message key="About" /></th>
+					<th><fmt:message key="Creation" /></th>
+					<th><fmt:message key="Desirable" /></th>
+					<th><fmt:message key="Start" /></th>
+					<th><fmt:message key="End" /></th>
 				</tr>
 				<c:forEach var="item" items="${list}">
 

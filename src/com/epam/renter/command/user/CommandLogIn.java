@@ -24,6 +24,7 @@ public class CommandLogIn implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
 
@@ -31,7 +32,7 @@ public class CommandLogIn implements ICommand {
 
 		if (user == null) {
 			request.setAttribute(ERROR,
-					Message.getInstance().getProperty(Message.WRONG_LOGIN));
+					"Не тот логин");
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);

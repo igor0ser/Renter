@@ -1,5 +1,6 @@
 package com.epam.renter.properties;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ResourceBundle;
 
 public class Message {
@@ -16,7 +17,8 @@ public class Message {
 	public static final String ADMIN_APP_IS_ASSIGNED = "ADMIN_APP_IS_ASSIGNED";
 	public static final String ADMIN_APP_IS_COMPLETED = "ADMIN_APP_IS_COMPLETED";
 	public static final String AN_APPLICATION = "AN_APPLICATION";
-	
+	public static final String LOGIN = "LOGIN";
+
 	public static Message getInstance() {
 		if (instance == null) {
 			instance = new Message();
@@ -29,6 +31,12 @@ public class Message {
 	}
 
 	public String getProperty(String key) {
+
 		return (String) resource.getObject(key);
+	}
+
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		String val = new Message().getProperty("WRONG_PASSWORD");
+		System.out.println(new String(val.getBytes("ISO-8859-1"), "UTF-8"));
 	}
 }

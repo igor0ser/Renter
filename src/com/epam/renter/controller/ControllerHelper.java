@@ -10,6 +10,7 @@ import com.epam.renter.command.admin.CommandCreatedApps;
 import com.epam.renter.command.admin.CommandFreeWorkers;
 import com.epam.renter.command.admin.CommandHandleApp;
 import com.epam.renter.command.admin.CommandSetAppComplete;
+import com.epam.renter.command.user.CommandChangeLanguage;
 import com.epam.renter.command.user.CommandCreateApp;
 import com.epam.renter.command.user.CommandLogIn;
 import com.epam.renter.command.user.CommandLogOut;
@@ -36,6 +37,7 @@ public class ControllerHelper {
 		commands.put("add_workers", new CommandAddWorkers());
 		commands.put("assigned_apps", new CommandAssignedApps());	
 		commands.put("set_app_complete", new CommandSetAppComplete());
+		commands.put("change_language", new CommandChangeLanguage());
 	}
 
 	public ICommand getCommand(HttpServletRequest request) {

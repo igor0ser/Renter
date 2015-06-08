@@ -1,3 +1,5 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<fmt:setLocale value="${language}" />
 </head>
 <body>
 
@@ -15,18 +18,18 @@
 
 
 	<div class="center-container animated fadeInUpBig">
-		<b>Aplication form:</b>
+		<b><fmt:message key="App_form"/></b>
 		<form id="app-form" action="controller" method="post">
 			<input type="hidden" name="command" value="create_app" />
 			<table>
 				<tr>
-					<td>About problem:</td>
+					<td><fmt:message key="About"/>:</td>
 					<td class="reg-input"><input type="text" name="about" required>
 						<span class="required"></span></td>
 				</tr>
 
 				<tr>
-					<td>Type of work:</td>
+					<td><fmt:message key="Type"/>:</td>
 					<td class="reg-input"><select name="type_of_work" required>
 							<option></option>
 							<option value="ELECTRIC">Electric</option>
@@ -37,7 +40,7 @@
 					</select> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td>Desirable time of execution:</td>
+					<td><fmt:message key="Desirable"/>:</td>
 					<td class="calendar" class="reg-input"><input name="desirable"
 						type="datetime-local" name="calendar" required> <span
 						class="required"></span></td>
@@ -45,7 +48,7 @@
 
 				<tr>
 					<td colspan="2" align="center"><button name="application"
-							type="submit">Submit</button></td>
+							type="submit"><fmt:message key="Submit"/></button></td>
 				</tr>
 			</table>
 		</form>
