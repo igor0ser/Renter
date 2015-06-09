@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <fmt:setLocale value="${language}" />
-<title>Renter - <fmt:message key="Thenk_you" /><c:out value="${sessionScope.login}"></c:out>!</title>
+<title>Renter - <fmt:message key="Thank_you" /><c:out value="${sessionScope.login}"></c:out>!</title>
 <link rel="stylesheet" href="main.css">
 <link rel="stylesheet" href="animate.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -25,7 +25,7 @@
 			<div id="flying_man">
 				<%@include file="flying_man.html"%>
 			</div>
-			<b><fmt:message key="As_soon" /><b>
+			<div class = "line_height"><b><fmt:message key="As_soon" /></b></div>
 		</div>
 	</div>
 

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+
 import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.User;
 
@@ -36,6 +38,7 @@ public class MySQLDAOUser implements IDAOUser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return user;
 	}
 
@@ -61,6 +64,8 @@ public class MySQLDAOUser implements IDAOUser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println(user);
+		LogManager.getLogger(MySQLDAOUser.class.getName()).error(String.format("User: %s is downloaded from DB.", user));
 		return user;
 	}
 

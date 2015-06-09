@@ -35,8 +35,4 @@ public class Message {
 		return (String) resource.getObject(key);
 	}
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
-		String val = new Message().getProperty("WRONG_PASSWORD");
-		System.out.println(new String(val.getBytes("ISO-8859-1"), "UTF-8"));
-	}
 }

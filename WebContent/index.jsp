@@ -42,11 +42,11 @@
 			<input type="hidden" name="command" value="login" />
 			<table>
 				<tr>
-					<td><fmt:message key="Login" /></td>
+					<td><fmt:message key="Login" />:</td>
 					<td class="info"><input type="text" name="login"></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Password" /></td>
+					<td><fmt:message key="Password" />:</td>
 					<td class="info"><input type="password" name="password"></td>
 				</tr>
 				<tr>
@@ -64,7 +64,7 @@
 
 	<div class="center-container animated fadeInUpBig">
 		<div id="hello">
-			<b><fmt:message key="Welcome" /></b>
+			<b><fmt:message key="Welcome" /><span id="Renter1">RENTER</span>!</b>
 		</div>
 		<b><fmt:message key="R_form" /></b>
 		<form id="reg-form" onSubmit="return checkPw(this)"

@@ -42,8 +42,8 @@
 					</select> <span class="required"></span></td>
 				</tr>
 				<tr>
-					<td><fmt:message key="Desirable" />:</td>
-					<td class="calendar" class="reg-input"><input name="desirable"
+					<td class =  "line_height"><fmt:message key="Desirable" />:</td>
+					<td class="calendar"><input class="desirable" name="desirable"
 						type="datetime-local" required value=<mytag:tomorrow9am/> ></td>
 				</tr>
 

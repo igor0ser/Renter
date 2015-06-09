@@ -25,6 +25,11 @@ body {
 	width: 200px;
 }
 
+#Renter1{
+	font-family: Tetra;
+	font-size: 125%;
+}
+
 #login-form {
 	display: inline-block;
 	width: 300px;
@@ -63,6 +68,11 @@ body {
 	border-spacing: 0px;
 	border: 1px solid black;
 	padding: 2px;
+	line-height: 150%;
+}
+
+.app-table{
+	
 }
 
 .about {
@@ -71,7 +81,6 @@ body {
 
 .app-table td {
 	padding: 5px;
-	line-height: 30px;
 }
 
 .app-table th {
@@ -130,16 +139,26 @@ select, input {
 	font: 1em 'PT Sans', Tahoma, Arial;
 }
 
-#app-form input {
-	width: 80%;
+#app-form td{
+	width: 400px;
 }
 
-#app-form  select {
-	width: 82%;
+#app-form input{	
+	width: 85%;
+}
+
+#app-form select{
+	width: 86%;
+}
+.line_height{
+	line-height: 175%;
 }
 
 #reg-form input {
 	width: 88%;
+}
+#reg-form td{
+	padding: 4px;
 }
 
 .reg-input .required:before, .reg-input .required:after {
@@ -194,7 +213,3 @@ select, input {
 	position: relative;
 	padding: 20px;
 }
-
-.calendar{
-	font-size: 85%;
-	}

@@ -2,12 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<fmt:setLocale value="${language}" />
 
 
 <!doctype html>
 <html lang = "en">
 <head>
-<fmt:setLocale value="${language}" />
 <meta charset ="UTF-8">
 <title>Renter - <fmt:message key="Hello" /></title>
 <link rel="stylesheet" href="main.css">
