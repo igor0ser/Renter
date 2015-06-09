@@ -12,6 +12,7 @@ import com.epam.renter.command.admin.CommandHandleApp;
 import com.epam.renter.command.admin.CommandSetAppComplete;
 import com.epam.renter.command.user.CommandChangeLanguage;
 import com.epam.renter.command.user.CommandCreateApp;
+import com.epam.renter.command.user.CommandGoToCreateApp;
 import com.epam.renter.command.user.CommandLogIn;
 import com.epam.renter.command.user.CommandLogOut;
 import com.epam.renter.command.user.CommandMyApplications;
@@ -30,6 +31,7 @@ public class ControllerHelper {
 		commands.put("logout", new CommandLogOut());
 		commands.put("registration", new CommandRegistration());
 		commands.put("see_app_user", new CommandMyApplications());
+		commands.put("go_to_create_app", new CommandGoToCreateApp());
 		commands.put("create_app", new CommandCreateApp());
 		commands.put("created_apps", new CommandCreatedApps());
 		commands.put("handle_app", new CommandHandleApp());

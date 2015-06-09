@@ -6,17 +6,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.properties.Config;
 
 public class CommandLogOut implements ICommand {
+	
+	private final Logger logger = LogManager.getLogger(CommandLogOut.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		//log out = destroy session
 		request.getSession().invalidate();
+		logger.info(String.format("User logged out"));
 		request.getRequestDispatcher(Config.getInstance().getProperty(Config.INDEX)).forward(request,
 				response);
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

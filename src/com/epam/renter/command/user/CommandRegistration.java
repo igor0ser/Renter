@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
@@ -25,7 +28,9 @@ public class CommandRegistration implements ICommand {
 	private static final String APPARTMENT = "appartment";
 	private static final String USER_ID = "user_id";
 	private static final String ERROR = "error";
-	private static final String USER = "user";
+	private final static String LAST_PAGE = "last_page";
+	private final Logger logger = LogManager
+			.getLogger(CommandRegistration.class.getName());
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -34,8 +39,14 @@ public class CommandRegistration implements ICommand {
 		String password = request.getParameter(PASSWORD);
 		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
 
+		// "password" must equals to "repeat password"
 		if (!password.equals(repeatPassword)) {
-			request.setAttribute(
+			logger.info(String
+					.format("Password doesn't equal to repeated one. Password= %s, repeated password = %s ",
+							password, repeatPassword));
+			request.getSession().setAttribute(LAST_PAGE,
+					Config.getInstance().getProperty(Config.ERROR_LOGIN));
+			request.getSession().setAttribute(
 					ERROR,
 					Message.getInstance().getProperty(
 							Message.WRONG_REP_PASSWORD));
@@ -46,8 +57,16 @@ public class CommandRegistration implements ICommand {
 		}
 
 		if (DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login) != null) {
-			request.setAttribute(ERROR,
-					Message.getInstance().getProperty(Message.WRONG_LOGIN_USED));
+			// if this Login is already in use:
+			logger.info(String.format("Login is already in use. Login = %s ",
+					login));
+			request.getSession()
+					.setAttribute(
+							ERROR,
+							Message.getInstance().getProperty(
+									Message.WRONG_LOGIN_USED));
+			request.getSession().setAttribute(LAST_PAGE,
+					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);
@@ -66,25 +85,34 @@ public class CommandRegistration implements ICommand {
 
 		User user = new User(login, password, name, surname, email, phoneNumber);
 		if (DAOFactory.mySQLFactory.mySQLDAOUser.create(user)) {
+			// new User is created
 			user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 			Address address = new Address(street, houseNumber,
 					appartmentNumber, user);
-			DAOFactory.mySQLFactory.mySQLDAOAddress.create(address);
+			//creating address of this user and loading it in DB
+			if (DAOFactory.mySQLFactory.mySQLDAOAddress.create(address)){
+				logger.error(String.format("Error in creating new address in DB"));
+			};
 			request.getSession().setAttribute(LOGIN, login);
-			request.getSession().setAttribute(NAME, name);
 			request.getSession().setAttribute(USER_ID, user.getId());
-			request.setAttribute(USER, user);
+			request.getSession().setAttribute(LAST_PAGE,
+					Config.getInstance().getProperty(Config.WELCOME));
+			logger.info(String.format("User pass threw registration. User login = %s",
+					login));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.WELCOME)).forward(
 					request, response);
 		} else {
+			//some errors in DB
+			logger.error(String.format("Error in creating new user in DB"));
 			request.setAttribute(ERROR,
 					Message.getInstance().getProperty(Message.RANDOM_ERROR));
+			request.getSession().setAttribute(LAST_PAGE,
+					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
 					.forward(request, response);
-			return null;
-		}
+			}
 
 		return null;
 	}

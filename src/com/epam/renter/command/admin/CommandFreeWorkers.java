@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.command.user.ICommand;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Worker;
@@ -29,11 +32,13 @@ public class CommandFreeWorkers implements ICommand {
 	private static final String DEFAULT_START = "default_start";
 	private static final String DEFAULT_END = "default_end";
 	private static final String APP = "app";
+	private final Logger logger = LogManager.getLogger(CommandCreatedApps.class
+			.getName());
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		// show admin list of free workers
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
 		String startTime = request.getParameter(START);
 		String endTime = request.getParameter(END);
@@ -45,17 +50,23 @@ public class CommandFreeWorkers implements ICommand {
 			start = formatter.parse(startTime);
 			end = formatter.parse(endTime);
 		} catch (ParseException e) {
-			e.printStackTrace();
-			return null;
+			logger.error(String.format(
+					"Date parse error. startTime = %s, endTime = %s", start,
+					end));
 		}
-		
-		Application app = (Application) request.getSession().getAttribute(APP);
 
+		Application app = (Application) request.getSession().getAttribute(APP);
+		
+		// all free workers ore free workers of only one specialty
 		List<Worker> freeWorkers = (showAll) ? ServiceWork.getFreeWorkers(
 				start, end) : ServiceWork.getFreeWorkers(app.getTypeOfWork(),
 				start, end);
-				
-				response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
+
+		logger.info(String.format(
+				"Admin downloaded the list of free workers. List size = %d",
+				freeWorkers.size()));
+
+		response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
 		request.getSession().setAttribute(LIST_WORKERS, freeWorkers);
 		request.setAttribute(LIST_SIZE, freeWorkers.size());
 

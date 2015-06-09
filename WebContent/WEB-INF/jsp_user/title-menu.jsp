@@ -1,5 +1,3 @@
-
-
 <div class="title-container">
 	<div id="title-string">RENTER</div>
 		<form action="controller" method="post" name="command">
@@ -34,9 +32,3 @@
 		</table>
 	</div>
 </div>
-
-
-
-
-
-</body>

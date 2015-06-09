@@ -64,8 +64,7 @@ public class MySQLDAOUser implements IDAOUser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(user);
-		LogManager.getLogger(MySQLDAOUser.class.getName()).error(String.format("User: %s is downloaded from DB.", user));
+		
 		return user;
 	}
 

@@ -9,6 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.command.user.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
@@ -23,6 +26,9 @@ public class CommandHandleApp implements ICommand {
 	private static final String DEFAULT_START = "default_start";
 	private static final String DEFAULT_END = "default_end";
 	private static final String FORMAT = "yyyy-MM-dd'T'HH:mm";
+	private final static String LAST_PAGE = "last_page";
+	private final Logger logger = LogManager.getLogger(CommandCreatedApps.class
+			.getName());
 
 	@Override
 	public String execute(HttpServletRequest request,
@@ -39,22 +45,24 @@ public class CommandHandleApp implements ICommand {
 				.findByUser(user);
 		user.setAddress(address);
 		app.setUser(user);
-		
+
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(app.getDesirable());
 		cal.add(Calendar.HOUR, 2);
 		Date defaultEndTime = cal.getTime();
-		
+
 		String defaultStart = formatter.format(app.getDesirable());
 		String defaultEnd = formatter.format(defaultEndTime);
-
+		logger.info(String.format(
+				"Admin goes to application's handling page. App id = %d", id));
 		request.getSession().setAttribute(DEFAULT_START, defaultStart);
 		request.getSession().setAttribute(DEFAULT_END, defaultEnd);
 		request.getSession().setAttribute(APP, app);
+		request.getSession().setAttribute(LAST_PAGE,
+				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP));
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))
 				.forward(request, response);
 		return null;
 	}
-
 }
