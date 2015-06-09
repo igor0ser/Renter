@@ -18,7 +18,7 @@ import com.epam.renter.entities.Address;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.User;
 import com.epam.renter.properties.Config;
-
+// this command allows admin handle one application
 public class CommandHandleApp implements ICommand {
 
 	private static final String APP_ID = "app_id";
@@ -46,15 +46,16 @@ public class CommandHandleApp implements ICommand {
 		user.setAddress(address);
 		app.setUser(user);
 
+		//default start equals to desirable time, default end equals to desirable time + 2 hours
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(app.getDesirable());
 		cal.add(Calendar.HOUR, 2);
 		Date defaultEndTime = cal.getTime();
-
 		String defaultStart = formatter.format(app.getDesirable());
 		String defaultEnd = formatter.format(defaultEndTime);
 		logger.info(String.format(
 				"Admin goes to application's handling page. App id = %d", id));
+		// default start & end is set to calendar on page
 		request.getSession().setAttribute(DEFAULT_START, defaultStart);
 		request.getSession().setAttribute(DEFAULT_END, defaultEnd);
 		request.getSession().setAttribute(APP, app);

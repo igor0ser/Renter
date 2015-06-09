@@ -1,6 +1,7 @@
 package com.epam.renter.command.user;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,8 @@ public class CommandLogIn implements ICommand {
 
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
-
+		Locale locale = request.getLocale();
+		Locale.setDefault(locale);
 		User user = DAOFactory.mySQLFactory.mySQLDAOUser.findByLogin(login);
 
 		// login is not found in DB

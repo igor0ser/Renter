@@ -18,7 +18,7 @@ import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Status;
 import com.epam.renter.entities.User;
 import com.epam.renter.properties.Config;
-
+//this command shows to admin list of unsigned applications
 public class CommandCreatedApps implements ICommand {
 
 	private static final String LIST = "list";
@@ -42,7 +42,7 @@ public class CommandCreatedApps implements ICommand {
 			app.setUser(user);
 		}
 		logger.info(String.format(
-					"Admin downloaded list of unsigned apps. List size = %d", list.size()));
+					"Admin downloaded the list of unsigned apps. List size = %d", list.size()));
 		request.getSession().setAttribute(LIST, list);
 		request.getSession().setAttribute(LIST_SIZE, list.size());
 		request.getSession().setAttribute(LAST_PAGE,

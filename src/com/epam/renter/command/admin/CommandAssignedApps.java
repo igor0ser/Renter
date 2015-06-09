@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.command.user.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
@@ -18,15 +21,19 @@ import com.epam.renter.entities.Worker;
 import com.epam.renter.properties.Config;
 import com.epam.renter.service.ServiceWork;
 
+// this command shows to admin list of all assigned and not completed applications
 public class CommandAssignedApps implements ICommand {
 
 	private static final String LIST = "list";
 	private static final String LIST_SIZE = "list_size";
+	private final static String LAST_PAGE = "last_page";
+	private final Logger logger = LogManager.getLogger(CommandCreatedApps.class
+			.getName());
 
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		// list of assigned applications from db
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
 				.findByStatus(Status.ASSIGNED);
 		for (Application app : list) {
@@ -36,14 +43,17 @@ public class CommandAssignedApps implements ICommand {
 					.findByUser(user);
 			user.setAddress(address);
 			app.setUser(user);
-
+			// list of workers to each application
 			List<Worker> workers = ServiceWork.getWorkersByApp(app);
 			app.setWorkers(workers);
 
 		}
-
-		request.setAttribute(LIST, list);
-		request.setAttribute(LIST_SIZE, list.size());
+		logger.info(String.format(
+				"Admin downloaded the list of unsigned apps. List size = %d", list.size()));
+		request.getSession().setAttribute(LIST, list);
+		request.getSession().setAttribute(LIST_SIZE, list.size());
+		request.getSession().setAttribute(LAST_PAGE,
+				Config.getInstance().getProperty(Config.ADMIN_ASSIGNED_APPS));
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_ASSIGNED_APPS))
 				.forward(request, response);

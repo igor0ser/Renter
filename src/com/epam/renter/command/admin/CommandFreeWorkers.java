@@ -19,7 +19,7 @@ import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Worker;
 import com.epam.renter.properties.Config;
 import com.epam.renter.service.ServiceWork;
-
+//this command show to admin list of free workers
 public class CommandFreeWorkers implements ICommand {
 
 	private static final String FORMAT = "yyyy-MM-dd'T'HH:mm";
@@ -52,7 +52,7 @@ public class CommandFreeWorkers implements ICommand {
 		} catch (ParseException e) {
 			logger.error(String.format(
 					"Date parse error. startTime = %s, endTime = %s", start,
-					end));
+					end)+e);
 		}
 
 		Application app = (Application) request.getSession().getAttribute(APP);
@@ -69,7 +69,7 @@ public class CommandFreeWorkers implements ICommand {
 		response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
 		request.getSession().setAttribute(LIST_WORKERS, freeWorkers);
 		request.setAttribute(LIST_SIZE, freeWorkers.size());
-
+		// default start & end is set to calendar on page
 		request.getSession().setAttribute(DEFAULT_START, startTime);
 		request.getSession().setAttribute(DEFAULT_END, endTime);
 		request.setAttribute(IS_CHECKED, showAll);

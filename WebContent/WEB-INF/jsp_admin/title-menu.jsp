@@ -1,12 +1,15 @@
 
 <div class="title-container">
 	<div id="title-string">RENTER</div>
-	<div id="language">
-		<button name="application" type="submit">EN</button>
-		</br>
-		<button name="application" type="submit">RU</button>
-		</br>
-	</div>
+	<form action="controller" method="post" name="command">
+		<input type="hidden" name="command" value="change_language" />
+		<div id="language">
+			<button name="lang" value="en" type="submit">EN</button>
+			</br>
+			<button name="lang" value="ru" type="submit">RU</button>
+			</br>
+		</div>
+	</form>
 
 	<div id="menu">
 		<table>
