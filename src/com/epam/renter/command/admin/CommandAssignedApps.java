@@ -7,11 +7,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.epam.renter.command.user.ICommand;
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.Application;
@@ -33,6 +34,7 @@ public class CommandAssignedApps implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		// list of assigned applications from db
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
 				.findByStatus(Status.ASSIGNED);
@@ -49,10 +51,11 @@ public class CommandAssignedApps implements ICommand {
 
 		}
 		logger.info(String.format(
-				"Admin downloaded the list of unsigned apps. List size = %d", list.size()));
-		request.getSession().setAttribute(LIST, list);
-		request.getSession().setAttribute(LIST_SIZE, list.size());
-		request.getSession().setAttribute(LAST_PAGE,
+				"Admin downloaded the list of unsigned apps. List size = %d",
+				list.size()));
+		session.setAttribute(LIST, list);
+		session.setAttribute(LIST_SIZE, list.size());
+		session.setAttribute(LAST_PAGE,
 				Config.getInstance().getProperty(Config.ADMIN_ASSIGNED_APPS));
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_ASSIGNED_APPS))

@@ -10,11 +10,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.epam.renter.command.user.ICommand;
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Worker;
 import com.epam.renter.properties.Config;
@@ -41,6 +42,8 @@ public class CommandFreeWorkers implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 		// show admin list of free workers
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
 		String startTime = request.getParameter(START);
@@ -68,7 +71,7 @@ public class CommandFreeWorkers implements ICommand {
 			return null;
 		}
 
-		Application app = (Application) request.getSession().getAttribute(APP);
+		Application app = (Application) session.getAttribute(APP);
 		
 		// all free workers ore free workers of only one specialty
 		List<Worker> freeWorkers = (showAll) ? ServiceWork.getFreeWorkers(
@@ -80,11 +83,11 @@ public class CommandFreeWorkers implements ICommand {
 				freeWorkers.size()));
 
 		response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
-		request.getSession().setAttribute(LIST_WORKERS, freeWorkers);
+		session.setAttribute(LIST_WORKERS, freeWorkers);
 		request.setAttribute(LIST_WORKERS_SIZE, freeWorkers.size());
 		// default start & end is set to calendar on page
-		request.getSession().setAttribute(DEFAULT_START, startTime);
-		request.getSession().setAttribute(DEFAULT_END, endTime);
+		session.setAttribute(DEFAULT_START, startTime);
+		session.setAttribute(DEFAULT_END, endTime);
 		request.setAttribute(IS_CHECKED, showAll);
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_HANDLE_APP))

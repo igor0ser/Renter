@@ -17,7 +17,6 @@ import com.epam.renter.command.user.CommandLogIn;
 import com.epam.renter.command.user.CommandLogOut;
 import com.epam.renter.command.user.CommandMyApplications;
 import com.epam.renter.command.user.CommandRegistration;
-import com.epam.renter.command.user.ICommand;
 
 public class ControllerHelper {
 

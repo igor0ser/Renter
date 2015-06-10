@@ -6,10 +6,12 @@ import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Admin;
 import com.epam.renter.entities.User;
@@ -29,7 +31,7 @@ public class CommandLogIn implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		HttpSession session = request.getSession();
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
 		Locale locale = request.getLocale();
@@ -39,9 +41,9 @@ public class CommandLogIn implements ICommand {
 		// login is not found in DB
 		if (user == null) {
 			logger.info(String.format("Wrong login. Login=%s", login));
-			request.getSession().setAttribute(ERROR,
+			session.setAttribute(ERROR,
 					Message.WRONG_LOGIN);
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
@@ -50,9 +52,9 @@ public class CommandLogIn implements ICommand {
 		} else if (!user.getPassword().equals(password)) {
 			logger.info(String.format("Wrong password. Login=%s, Password=%s",
 					login, password));
-			request.getSession().setAttribute(ERROR,
+			session.setAttribute(ERROR,
 					Message.WRONG_PASSWORD);
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
@@ -67,11 +69,11 @@ public class CommandLogIn implements ICommand {
 				// login belongs to administrator's account
 				logger.info(String.format("Admin has logged in. Login=%s",
 						login));
-				request.getSession().setAttribute(LOGIN, login);
-				request.getSession().setAttribute(
+				session.setAttribute(LOGIN, login);
+				session.setAttribute(
 						ADMIN_MESSAGE,
 						Message.ADMIN_WELCOME);
-				request.getSession().setAttribute(LAST_PAGE,
+				session.setAttribute(LAST_PAGE,
 						Config.getInstance().getProperty(Config.ADMIN_MESSAGE));
 				request.getRequestDispatcher(
 						Config.getInstance().getProperty(Config.ADMIN_MESSAGE))
@@ -81,9 +83,9 @@ public class CommandLogIn implements ICommand {
 				logger.info(String
 						.format("User has logged in. Login=%s", login));
 
-				request.getSession().setAttribute(LOGIN, login);
-				request.getSession().setAttribute(USER_ID, user.getId());
-				request.getSession().setAttribute(LAST_PAGE,
+				session.setAttribute(LOGIN, login);
+				session.setAttribute(USER_ID, user.getId());
+				session.setAttribute(LAST_PAGE,
 						Config.getInstance().getProperty(Config.WELCOME));
 				request.getRequestDispatcher(
 						Config.getInstance().getProperty(Config.WELCOME))

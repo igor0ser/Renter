@@ -6,10 +6,12 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Application;
 import com.epam.renter.properties.Config;
@@ -25,17 +27,17 @@ public class CommandMyApplications implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		int userID = (int) request.getSession().getAttribute(USER_ID);
+		HttpSession session = request.getSession();
+		int userID = (int) session.getAttribute(USER_ID);
 		
 		//getting list of application that created by this user
 		List<Application> list = DAOFactory.mySQLFactory.mySQLDAOApplication
 				.findByUserID(userID);
 
-		request.getSession().setAttribute(LIST, list);
-		request.getSession().setAttribute(LIST_SIZE, list.size());
+		session.setAttribute(LIST, list);
+		session.setAttribute(LIST_SIZE, list.size());
 		logger.info(String.format("User (id = %d) watches his applications. He has %d applications", userID, list.size()));
-		request.getSession().setAttribute(LAST_PAGE,
+		session.setAttribute(LAST_PAGE,
 				Config.getInstance().getProperty(Config.MY_APPS));
 		request.getRequestDispatcher(Config.getInstance().getProperty(Config.MY_APPS)).forward(request,
 				response);

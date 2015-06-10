@@ -5,10 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Address;
 import com.epam.renter.entities.User;
@@ -35,6 +37,7 @@ public class CommandRegistration implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
 		String repeatPassword = request.getParameter(REPEAT_PASSWORD);
@@ -44,9 +47,9 @@ public class CommandRegistration implements ICommand {
 			logger.info(String
 					.format("Password doesn't equal to repeated one. Password= %s, repeated password = %s ",
 							password, repeatPassword));
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
-			request.getSession().setAttribute(
+			session.setAttribute(
 					ERROR,
 					Message.getInstance().getProperty(
 							Message.WRONG_REP_PASSWORD));
@@ -65,7 +68,7 @@ public class CommandRegistration implements ICommand {
 							ERROR,
 							Message.getInstance().getProperty(
 									Message.WRONG_LOGIN_USED));
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))
@@ -93,9 +96,9 @@ public class CommandRegistration implements ICommand {
 			if (DAOFactory.mySQLFactory.mySQLDAOAddress.create(address)){
 				logger.error(String.format("Error in creating new address in DB"));
 			};
-			request.getSession().setAttribute(LOGIN, login);
-			request.getSession().setAttribute(USER_ID, user.getId());
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LOGIN, login);
+			session.setAttribute(USER_ID, user.getId());
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.WELCOME));
 			logger.info(String.format("User pass threw registration. User login = %s",
 					login));
@@ -107,7 +110,7 @@ public class CommandRegistration implements ICommand {
 			logger.error(String.format("Error in creating new user in DB"));
 			request.setAttribute(ERROR,
 					Message.getInstance().getProperty(Message.RANDOM_ERROR));
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_LOGIN))

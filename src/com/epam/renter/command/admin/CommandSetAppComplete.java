@@ -6,11 +6,12 @@ import java.util.Locale;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.epam.renter.command.user.ICommand;
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Status;
@@ -29,6 +30,7 @@ public class CommandSetAppComplete implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Locale locale = request.getLocale();
 		Locale.setDefault(locale);
 		// loading an application from DB
@@ -41,7 +43,7 @@ public class CommandSetAppComplete implements ICommand {
 		// changing it in DB
 		boolean flag = DAOFactory.mySQLFactory.mySQLDAOApplication.update(app);
 		if (!flag) {
-			request.getSession().setAttribute(ADMIN_MESSAGE,
+			session.setAttribute(ADMIN_MESSAGE,
 					Message.ADMIN_ERROR);
 			logger.error(String.format(
 					"Application wasn't saved to DB. Application = %s ", app));
@@ -49,10 +51,10 @@ public class CommandSetAppComplete implements ICommand {
 		} else {
 			logger.info(String.format(
 					"Application saved to DB. Application = %s ", app));
-			request.getSession().setAttribute(ADMIN_MESSAGE, Message.ADMIN_APP_IS_COMPLETED);
+			session.setAttribute(ADMIN_MESSAGE, Message.ADMIN_APP_IS_COMPLETED);
 
 		}
-		request.getSession().setAttribute(LAST_PAGE,
+		session.setAttribute(LAST_PAGE,
 				Config.getInstance().getProperty(Config.ADMIN_MESSAGE));
 		request.getRequestDispatcher(
 				Config.getInstance().getProperty(Config.ADMIN_MESSAGE))

@@ -1,4 +1,4 @@
-package com.epam.renter.command.user;
+package com.epam.renter.controller;
 
 import java.io.IOException;
 

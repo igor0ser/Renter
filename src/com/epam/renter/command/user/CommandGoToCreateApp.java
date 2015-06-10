@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.properties.Config;
 
 public class CommandGoToCreateApp implements ICommand {

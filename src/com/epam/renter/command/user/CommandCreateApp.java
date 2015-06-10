@@ -8,10 +8,12 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.TypeOfWork;
@@ -33,7 +35,7 @@ public class CommandCreateApp implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
 
 		// parsing application from browser
@@ -41,7 +43,7 @@ public class CommandCreateApp implements ICommand {
 		String type = request.getParameter(TYPE);
 		TypeOfWork typeOfWork = TypeOfWork.valueOf(type);
 		String desirableTime = request.getParameter(DESIRABLE);
-		int userID = (int) request.getSession().getAttribute(USER_ID);
+		int userID = (int) session.getAttribute(USER_ID);
 		Date desirable = null;
 		try {
 			// parse Date from browser
@@ -63,7 +65,7 @@ public class CommandCreateApp implements ICommand {
 		if (flag) {
 			logger.info(String.format("Application is loaded in DB. App = %s",
 					application));
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.THANK_YOU));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.THANK_YOU))
@@ -72,7 +74,7 @@ public class CommandCreateApp implements ICommand {
 			logger.error(String.format(
 					"Some error in loading application in DB. App = %s",
 					application));
-			request.getSession().setAttribute(LAST_PAGE,
+			session.setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_DB));
 			request.getRequestDispatcher(
 					Config.getInstance().getProperty(Config.ERROR_DB)).forward(

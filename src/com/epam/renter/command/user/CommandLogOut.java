@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.properties.Config;
 
 public class CommandLogOut implements ICommand {

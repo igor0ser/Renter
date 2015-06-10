@@ -56,9 +56,7 @@
 	<div class="center-container">
 		<div id="message-container">
 		<b><fmt:message key="${error}" /></b>
-		<button onClick="history.back()">
-				<fmt:message key="Back" />
-			</button>
+<button  onClick="history.back()"><fmt:message key="Back" /></button>
 
 		</div>
 	</div>

@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.epam.renter.command.user.ICommand;
+import com.epam.renter.controller.ICommand;
 import com.epam.renter.datasource.DAOFactory;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Status;
@@ -31,7 +31,6 @@ public class CommandAddWorkers implements ICommand {
 	private static final String DEFAULT_END = "default_end";
 	private static final String APP = "app";
 	private static final String LIST_WORKERS = "list_workers";
-	private static final String LIST_WORKERS_SIZE = "list_workers_size";
 	private static final String ADMIN_MESSAGE = "message";
 	private final static String LAST_PAGE = "last_page";
 
@@ -41,13 +40,12 @@ public class CommandAddWorkers implements ICommand {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		Application app = (Application) request.getSession().getAttribute(APP);
+		HttpSession session = request.getSession();
+		Application app = (Application) session.getAttribute(APP);
 		SimpleDateFormat formatter = new SimpleDateFormat(FORMAT);
-		String startTime = (String) request.getSession().getAttribute(
+		String startTime = (String) session.getAttribute(
 				DEFAULT_START);
-		String endTime = (String) request.getSession()
-				.getAttribute(DEFAULT_END);
+		String endTime = (String) session.getAttribute(DEFAULT_END);
 		Date start = null;
 		Date end = null;
 		// parsing dates
@@ -65,8 +63,7 @@ public class CommandAddWorkers implements ICommand {
 		}
 
 		// getting list of free workers (from previous command)
-		List<Worker> list_worker = (List<Worker>) request.getSession()
-				.getAttribute(LIST_WORKERS);
+		List<Worker> list_worker = (List<Worker>) session.getAttribute(LIST_WORKERS);
 		System.out.println(list_worker.size());
 		int quantity = 0;
 		for (Worker worker : list_worker) {
