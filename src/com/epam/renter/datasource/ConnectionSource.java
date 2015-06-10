@@ -7,18 +7,23 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ConnectionSource {
 
 	private InitialContext initContext;
 	private DataSource ds;
 	private static ConnectionSource instance = new ConnectionSource();
-
+	private final Logger logger = LogManager.getLogger(ConnectionSource.class
+			.getName());
+	
 	private ConnectionSource() {
 		try {
 			initContext = new InitialContext();
 			ds = (DataSource) initContext.lookup("java:comp/env/jdbc/renterdb");
 		} catch (NamingException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 	}
@@ -32,8 +37,7 @@ public class ConnectionSource {
 		try {
 			connection = ds.getConnection();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return connection;
 	}

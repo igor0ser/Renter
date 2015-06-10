@@ -1,18 +1,22 @@
 package com.epam.renter.dao;
 
-import com.epam.renter.datasource.ConnectionSource;
-import com.epam.renter.entities.Address;
-import com.epam.renter.entities.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.epam.renter.datasource.ConnectionSource;
+import com.epam.renter.entities.Address;
+import com.epam.renter.entities.User;
+
 public class MySQLDAOAddress implements IDAOAddress {
 	private static String READ_BY_ID_QUERY = "SELECT * FROM addresses WHERE idUser=?;";
 	private static String CREATE_QUERY = "INSERT INTO addresses (street, house, appartment, idUser) VALUES (?,?,?,?);";
-
+	private final Logger logger = LogManager.getLogger(MySQLDAOAddress.class
+			.getName());
 	@Override
 	public Address findByUser(User user) {
 		Address address = null;
@@ -30,7 +34,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 				address.setUser(user);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return address;
 	}
@@ -48,7 +52,7 @@ public class MySQLDAOAddress implements IDAOAddress {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 

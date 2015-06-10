@@ -8,6 +8,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Status;
@@ -20,7 +23,9 @@ public class MySQLDAOApplication implements IDAOApplication {
 	private static String READ_BY_STATUS_QUERY = "SELECT * FROM applications WHERE status=?;";
 	private static String CREATE_QUERY = "INSERT INTO applications (idUser, about, status, typeOfWork, creation, desirable, start, end) VALUES (?,?,?,?,?,?,?,?);";
 	private static String UPDATE_QUERY = "UPDATE applications SET start=?, end=?, status=? WHERE idApplication=?;";
-
+	private final Logger logger = LogManager.getLogger(MySQLDAOApplication.class
+			.getName());
+	
 	@Override
 	public Application findByID(int ID) {
 		Application application = null;
@@ -44,7 +49,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 				application.setEnd(resultSet.getTimestamp("end"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return application;
 	}
@@ -72,7 +77,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 				list.add(application);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 
@@ -102,7 +107,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 				list.add(application);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
@@ -134,7 +139,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 	}
@@ -156,7 +161,7 @@ public class MySQLDAOApplication implements IDAOApplication {
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 	}

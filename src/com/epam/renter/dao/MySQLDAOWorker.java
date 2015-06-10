@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.TypeOfWork;
 import com.epam.renter.entities.Worker;
@@ -15,6 +18,8 @@ public class MySQLDAOWorker implements IDAOWorker {
 	private static String FIND_BY_ID_TYPE_OF_WORK = "SELECT *  FROM workers WHERE typeOfWork=?;";
 	private static String FIND_BY_ID_QUERY = "SELECT *  FROM workers WHERE idWorker=?;";
 	private static String READ_ALL_QUERY = "SELECT *  FROM workers;";
+	private final Logger logger = LogManager.getLogger(MySQLDAOWorker.class
+			.getName());
 
 	@Override
 	public List<Worker> findByTypeOfWork(TypeOfWork typeOfWork) {
@@ -34,7 +39,7 @@ public class MySQLDAOWorker implements IDAOWorker {
 				list.add(worker);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
@@ -56,7 +61,7 @@ public class MySQLDAOWorker implements IDAOWorker {
 				list.add(worker);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
@@ -79,7 +84,7 @@ public class MySQLDAOWorker implements IDAOWorker {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 
 		return worker;

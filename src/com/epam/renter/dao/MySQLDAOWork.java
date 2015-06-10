@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.renter.datasource.ConnectionSource;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Work;
@@ -16,6 +19,8 @@ public class MySQLDAOWork implements IDAOWork {
 	private static String FIND_BY_WORKER_ID = "SELECT *  FROM works WHERE idWorker=?;";
 	private static String FIND_BY_APPLICATION_ID = "SELECT *  FROM works WHERE idApplication=?;";
 	private static String CREATE_QUERY = "INSERT INTO works (idApplication, idWorker) VALUES (?,?);";
+	private final Logger logger = LogManager.getLogger(MySQLDAOWork.class
+			.getName());
 
 	@Override
 	public List<Work> findByWorker(Worker worker) {
@@ -32,7 +37,7 @@ public class MySQLDAOWork implements IDAOWork {
 				list.add(work);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
@@ -47,11 +52,12 @@ public class MySQLDAOWork implements IDAOWork {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Worker worker = new Worker(resultSet.getInt("idWorker"));
-				Work work = new Work(resultSet.getInt("idWork"), application, worker);
+				Work work = new Work(resultSet.getInt("idWork"), application,
+						worker);
 				list.add(work);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return list;
 	}
@@ -64,11 +70,11 @@ public class MySQLDAOWork implements IDAOWork {
 					.prepareStatement(CREATE_QUERY);
 			preparedStatement.setInt(1, work.getApplication().getId());
 			preparedStatement.setInt(2, work.getWorker().getId());
-			
+
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 			return false;
 		}
 	}
