@@ -40,7 +40,7 @@ public class CommandLogIn implements ICommand {
 		if (user == null) {
 			logger.info(String.format("Wrong login. Login=%s", login));
 			request.getSession().setAttribute(ERROR,
-					Message.getInstance().getProperty(Message.WRONG_LOGIN));
+					Message.WRONG_LOGIN);
 			request.getSession().setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
@@ -51,7 +51,7 @@ public class CommandLogIn implements ICommand {
 			logger.info(String.format("Wrong password. Login=%s, Password=%s",
 					login, password));
 			request.getSession().setAttribute(ERROR,
-					Message.getInstance().getProperty(Message.WRONG_PASSWORD));
+					Message.WRONG_PASSWORD);
 			request.getSession().setAttribute(LAST_PAGE,
 					Config.getInstance().getProperty(Config.ERROR_LOGIN));
 			request.getRequestDispatcher(
@@ -70,8 +70,7 @@ public class CommandLogIn implements ICommand {
 				request.getSession().setAttribute(LOGIN, login);
 				request.getSession().setAttribute(
 						ADMIN_MESSAGE,
-						Message.getInstance()
-								.getProperty(Message.ADMIN_WELCOME));
+						Message.ADMIN_WELCOME);
 				request.getSession().setAttribute(LAST_PAGE,
 						Config.getInstance().getProperty(Config.ADMIN_MESSAGE));
 				request.getRequestDispatcher(

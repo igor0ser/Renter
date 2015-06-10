@@ -19,8 +19,8 @@
 
 	<div class="center-container">
 		<div id="message-container">
-			<b><c:out value="${message}"></c:out></b>
-			</div>
+			<b><b><fmt:message key="${message}" /></b>
+		</div>
 	</div>
 
 </body>

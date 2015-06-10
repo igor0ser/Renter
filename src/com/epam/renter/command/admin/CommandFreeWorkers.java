@@ -18,6 +18,7 @@ import com.epam.renter.command.user.ICommand;
 import com.epam.renter.entities.Application;
 import com.epam.renter.entities.Worker;
 import com.epam.renter.properties.Config;
+import com.epam.renter.properties.Message;
 import com.epam.renter.service.ServiceWork;
 //this command show to admin list of free workers
 public class CommandFreeWorkers implements ICommand {
@@ -27,11 +28,13 @@ public class CommandFreeWorkers implements ICommand {
 	private static final String END = "end";
 	private static final String IS_CHECKED = "is_checked";
 	private static final String LIST_WORKERS = "list_workers";
-	private static final String LIST_SIZE = "list_size";
+	private static final String LIST_WORKERS_SIZE = "list_workers_size";
 	private static final String SHOW_ALL = "show-all";
 	private static final String DEFAULT_START = "default_start";
 	private static final String DEFAULT_END = "default_end";
 	private static final String APP = "app";
+	private static final String ADMIN_MESSAGE = "message";
+	private final static String LAST_PAGE = "last_page";
 	private final Logger logger = LogManager.getLogger(CommandCreatedApps.class
 			.getName());
 
@@ -51,8 +54,18 @@ public class CommandFreeWorkers implements ICommand {
 			end = formatter.parse(endTime);
 		} catch (ParseException e) {
 			logger.error(String.format(
-					"Date parse error. startTime = %s, endTime = %s", start,
-					end)+e);
+					"Date parse error. startTime = %s, endTime = %s", startTime,
+					end)+endTime);
+			forvardMessage(request, response, Message.ADMIN_PARSE_DATE_ERROR);
+			return null;
+		}
+		//start must be before end of work
+		if (start.after(end)){
+			logger.error(String.format(
+					"Admin has chosen wrong time. Start = %s, end = %s", start,
+					end));
+			forvardMessage(request, response, Message.ADMIN_WRONG_TIME);
+			return null;
 		}
 
 		Application app = (Application) request.getSession().getAttribute(APP);
@@ -68,7 +81,7 @@ public class CommandFreeWorkers implements ICommand {
 
 		response.getWriter().println(Arrays.toString(freeWorkers.toArray()));
 		request.getSession().setAttribute(LIST_WORKERS, freeWorkers);
-		request.setAttribute(LIST_SIZE, freeWorkers.size());
+		request.setAttribute(LIST_WORKERS_SIZE, freeWorkers.size());
 		// default start & end is set to calendar on page
 		request.getSession().setAttribute(DEFAULT_START, startTime);
 		request.getSession().setAttribute(DEFAULT_END, endTime);
@@ -78,5 +91,16 @@ public class CommandFreeWorkers implements ICommand {
 				.forward(request, response);
 
 		return null;
+	}
+	
+	private void forvardMessage(HttpServletRequest request,
+			HttpServletResponse response, String messageKey)
+			throws ServletException, IOException {
+		request.getSession().setAttribute(ADMIN_MESSAGE, messageKey);
+		request.getSession().setAttribute(LAST_PAGE,
+				Config.getInstance().getProperty(Config.ADMIN_MESSAGE));
+		request.getRequestDispatcher(
+				Config.getInstance().getProperty(Config.ADMIN_MESSAGE))
+				.forward(request, response);
 	}
 }

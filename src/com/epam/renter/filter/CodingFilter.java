@@ -9,44 +9,41 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.epam.renter.command.admin.CommandCreatedApps;
+
 //@WebFilter("/CodingFilter")
 public class CodingFilter implements Filter {
-	
-    /**
-     * Default constructor. 
-     */
-    public CodingFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	private final Logger logger = LogManager.getLogger(CodingFilter.class
+			.getName());
+	private static final String CODING = "UTF-8";
 
-	/**
-	 * @see Filter#destroy()
-	 */
+	public CodingFilter() {
+	}
+
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+// Filter changes coding to UTF-8
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
 
-		
-		
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-
-		
-		chain.doFilter(request, response);
+		if (request.getCharacterEncoding() != CODING) {
+			request.setCharacterEncoding(CODING);
+			logger.trace("Request coding changed to UTF-8");
+		}
+		if (response.getCharacterEncoding()!=CODING){
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			logger.trace("Responce coding changed to UTF-8");
+		}
+			chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
+
 	public void init(FilterConfig fConfig) throws ServletException {
-		
 	}
 
 }

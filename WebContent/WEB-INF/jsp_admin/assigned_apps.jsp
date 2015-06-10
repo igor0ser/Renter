@@ -58,6 +58,10 @@
 						<td class="time">----</td>
 						<td class="time">----</td>
 						<td class="time">----</td>
+						<td class="time">----</td>
+						<td class="time">----</td>
+						<td class="time">----</td>
+						<td class="time">----</td>
 
 					</tr>
 				</c:if>

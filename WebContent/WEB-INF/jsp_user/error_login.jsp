@@ -55,10 +55,9 @@
 
 	<div class="center-container">
 		<div id="message-container">
-			<c:out value="${error}"></c:out>
-			<b><fmt:message key="WRONG_LOGIN" /></b>
-			<button onClick="history.back()">
-				<fmt:message key="Back_to_start" />
+		<b><fmt:message key="${error}" /></b>
+		<button onClick="history.back()">
+				<fmt:message key="Back" />
 			</button>
 
 		</div>

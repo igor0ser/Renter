@@ -10,6 +10,7 @@
 <title>Renter - <fmt:message key="Handle" /></title>
 <link rel="stylesheet" href="main_admin.css">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
 </head>
 <body>
 
@@ -59,23 +60,48 @@
 			</table>
 
 			<input type="checkbox" name="show-all" value="true"
-				<c:if test="${is_checked}">checked</c:if>> <fmt:message key="Show_all_spec" />
+				<c:if test="${is_checked}">checked</c:if>>
+			<fmt:message key="Show_all_spec" />
 
-			<button type="submit"><fmt:message key="Show_free_workers" /></button>
+			<button type="submit">
+				<fmt:message key="Show_free_workers" />
+			</button>
 		</form>
 
 
-
-		<c:if test="${list_size > 0}">
+		<c:if test="${list_workers_size == 0}">
+		<table class="app-table" rules="all">
+					<caption>
+						<b> <fmt:message key="Free_workers" />
+						</b>
+					</caption>
+					<tbody>
+						<tr>
+							<th><fmt:message key="Name" /></th>
+							<th><fmt:message key="Specialty" /></th>
+							<th><fmt:message key="Assign" /></th>
+						</tr>
+						
+							<tr>
+								<td>---</td>
+								<td>---</td>
+								<td>---</td>
+							</tr>
+						
+					</tbody>
+				</table>
+</c:if>
+		<c:if test="${list_workers_size > 0}">
 			<form action="controller" method="post">
 				<input type="hidden" name="command" value="add_workers" />
 				<table class="app-table" rules="all">
 					<caption>
-						<b>  <fmt:message key="Free_workers" /> </b>
+						<b> <fmt:message key="Free_workers" />
+						</b>
 					</caption>
 					<tbody>
 						<tr>
-							<th> <fmt:message key="Name" /></th>
+							<th><fmt:message key="Name" /></th>
 							<th><fmt:message key="Specialty" /></th>
 							<th><fmt:message key="Assign" /></th>
 						</tr>
@@ -88,7 +114,9 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<button type="submit"><fmt:message key="Add_to_this_work" /></button>
+				<button type="submit">
+					<fmt:message key="Add_to_this_work" />
+				</button>
 			</form>
 		</c:if>
 </body>

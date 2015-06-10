@@ -21,7 +21,7 @@
 <div id="message-container">
 <b><div class="line_height"><span><fmt:message key="Some_errors" /></span>
 <fmt:message key="Try_again" /></b></div>
-<button  onClick="history.back()"><fmt:message key="Back_to_create" /></button>
+<button  onClick="history.back()"><fmt:message key="Back" /></button>
 </div>
 </div>
 </body>

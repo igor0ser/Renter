@@ -42,16 +42,14 @@ public class CommandSetAppComplete implements ICommand {
 		boolean flag = DAOFactory.mySQLFactory.mySQLDAOApplication.update(app);
 		if (!flag) {
 			request.getSession().setAttribute(ADMIN_MESSAGE,
-					Message.getInstance().getProperty(Message.ADMIN_ERROR));
+					Message.ADMIN_ERROR);
 			logger.error(String.format(
 					"Application wasn't saved to DB. Application = %s ", app));
 
 		} else {
 			logger.info(String.format(
 					"Application saved to DB. Application = %s ", app));
-			String mes = Message.getInstance().getProperty(
-							Message.ADMIN_APP_IS_COMPLETED) + " " + app.getAbout();
-			request.getSession().setAttribute(ADMIN_MESSAGE, mes);
+			request.getSession().setAttribute(ADMIN_MESSAGE, Message.ADMIN_APP_IS_COMPLETED);
 
 		}
 		request.getSession().setAttribute(LAST_PAGE,

@@ -16,8 +16,11 @@ public class Message {
 	public static final String ADMIN_ERROR = "ADMIN_ERROR";
 	public static final String ADMIN_APP_IS_ASSIGNED = "ADMIN_APP_IS_ASSIGNED";
 	public static final String ADMIN_APP_IS_COMPLETED = "ADMIN_APP_IS_COMPLETED";
-	public static final String AN_APPLICATION = "AN_APPLICATION";
 	public static final String LOGIN = "LOGIN";
+	public static final String ADMIN_PARSE_DATE_ERROR = "ADMIN_PARSE_DATE_ERROR";
+	public static final String ADMIN_NULL_WORKERS = "ADMIN_NULL_WORKERS";
+	public static final String ADMIN_DB_ERROR = "ADMIN_DB_ERROR";
+	public static final String ADMIN_WRONG_TIME = "ADMIN_WRONG_TIME";
 
 	public static Message getInstance() {
 		if (instance == null) {
